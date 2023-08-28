@@ -20,15 +20,15 @@ import lombok.NoArgsConstructor;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "Users")
+@Table(name = "Utente")
 @Data
 @NoArgsConstructor
 public class Utente implements UserDetails {
 
 	@Id
 	@GeneratedValue
-	private UUID user_Id;
-	private String user_name;
+	private UUID userId;
+	private String username;
 	@Column(nullable = true, unique = true)
 	private String email;
 	private String nome;
@@ -37,11 +37,11 @@ public class Utente implements UserDetails {
 	@Enumerated(EnumType.STRING)
 	private Ruolo role;
 
-	public Utente(String nome, String cognome, String email, String password, String user_name, Ruolo role) {
-		this.user_name = user_name;
-		this.email = email;
+	public Utente(String nome, String cognome, String username, String email, String password, Ruolo role) {
 		this.nome = nome;
 		this.cognome = cognome;
+		this.username = username;
+		this.email = email;
 		this.password = password;
 		this.role = role;
 	}
@@ -55,7 +55,7 @@ public class Utente implements UserDetails {
 	@Override
 	public String getUsername() {
 
-		return this.user_name;
+		return this.username;
 	}
 
 	@Override

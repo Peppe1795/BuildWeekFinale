@@ -22,14 +22,14 @@ public class UtenteRunner implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Faker faker = new Faker(new Locale("it"));
 
-		for (int i = 0; i < 30; i++) {
+		for (int i = 0; i < 5; i++) {
 			String name = faker.name().firstName();
 			String surname = faker.name().lastName();
 			String username = faker.name().username();
 			String email = faker.internet().emailAddress();
 			String password = faker.lorem().characters(6, 12);
 			UtenteRequestPayload utente = new UtenteRequestPayload(name, surname, username, email, password);
-			// utenteService.creaUtente(utente);
+			utenteService.creaUtente(utente);
 
 		}
 	}

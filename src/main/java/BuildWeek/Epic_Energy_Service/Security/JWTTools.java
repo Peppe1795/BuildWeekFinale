@@ -16,7 +16,7 @@ public class JWTTools {
 	private String secret;
 
 	public String creaToken(Utente user) {
-		String token = Jwts.builder().setSubject(user.getUser_Id().toString()) // A chi appartiene il token (Subject)
+		String token = Jwts.builder().setSubject(user.getUserId().toString()) // A chi appartiene il token (Subject)
 				.setIssuedAt(new Date(System.currentTimeMillis())) // Quando è stato emesso il token (IAT - Issued At)
 				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7)) // Quando scadrà il
 				// token

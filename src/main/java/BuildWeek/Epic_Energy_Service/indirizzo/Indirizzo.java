@@ -18,7 +18,7 @@ public class Indirizzo {
 
 	@Id
 	@GeneratedValue
-	private UUID indirizzo_id;
+	private UUID indirizzoId;
 	private String via;
 	private String numero_civico;
 	private String località;
