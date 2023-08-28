@@ -12,12 +12,14 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class Cliente {
 	@Id
 	@GeneratedValue
@@ -41,7 +43,7 @@ public class Cliente {
 	@OneToMany
 	private List<Fattura> fatture;
 
-	public Cliente(String ragione_sociale, int partita_iva, String email, LocalDate data_inserimento,
+	public Cliente(String ragione_sociale, long partita_iva, String email, LocalDate data_inserimento,
 			LocalDate data_ultimoContatto, double fatturato_annuale, String pec, int telefono, String email_contatto,
 			String nome_contatto, String cognome_contatto, String telefono_contatto, Tipo_cliente tipo_cliente) {
 		this.ragione_sociale = ragione_sociale;
