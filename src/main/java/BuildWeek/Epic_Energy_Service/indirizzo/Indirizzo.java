@@ -3,6 +3,7 @@ package BuildWeek.Epic_Energy_Service.indirizzo;
 import java.util.UUID;
 
 import BuildWeek.Epic_Energy_Service.cliente.Cliente;
+import BuildWeek.Epic_Energy_Service.comuni.Comune;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -22,7 +23,9 @@ public class Indirizzo {
 	private String numero_civico;
 	private String località;
 	private int cap;
-	private String comune;
+
+	@ManyToOne
+	private Comune comune;
 	@ManyToOne
 	private Cliente cliente;
 
