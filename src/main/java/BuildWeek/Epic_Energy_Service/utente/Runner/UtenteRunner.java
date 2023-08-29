@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.github.javafaker.Faker;
@@ -17,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 public class UtenteRunner implements CommandLineRunner {
 	@Autowired
 	UtenteService utenteService;
+	@Autowired
+	PasswordEncoder bcrypt;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -27,9 +30,9 @@ public class UtenteRunner implements CommandLineRunner {
 			String surname = faker.name().lastName();
 			String username = faker.name().username();
 			String email = faker.internet().emailAddress();
-			String password = faker.lorem().characters(6, 12);
+			String password = bcrypt.encode(faker.lorem().characters(6, 12));
 			UtenteRequestPayload utente = new UtenteRequestPayload(name, surname, username, email, password);
-			// utenteService.creaUtente(utente);
+			utenteService.creaUtente(utente);
 
 		}
 	}
