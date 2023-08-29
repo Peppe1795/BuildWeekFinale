@@ -4,13 +4,17 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import BuildWeek.Epic_Energy_Service.comuni.Comune;
+import BuildWeek.Epic_Energy_Service.comuni.ComuneService;
 import BuildWeek.Epic_Energy_Service.province.Provincia;
 
 @Component
 public class CsvConverter {
+	@Autowired
+	private ComuneService cs;
 	private Scanner scanner;
 
 	public CsvConverter() {
@@ -47,7 +51,7 @@ public class CsvConverter {
 				String nome_provincia = parts[3];
 
 				Comune comune = new Comune(codice_provincia, progressivo_comune, denominazione, nome_provincia);
-				System.out.println(comune);
+				cs.saveComune(comune);
 			}
 
 		}
