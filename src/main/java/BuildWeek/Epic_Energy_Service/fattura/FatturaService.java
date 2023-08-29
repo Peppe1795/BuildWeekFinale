@@ -42,7 +42,7 @@ public class FatturaService {
 		found.setData(body.getData());
 		found.setImporto(body.getImporto());
 		found.setNumero(body.getNumero());
-		found.setStato_fattura(body.getStato_fattura());
+		found.setStatoFattura(body.getStato_fattura());
 		found.setCliente(body.getCliente());
 
 		return fatturaRepo.save(found);

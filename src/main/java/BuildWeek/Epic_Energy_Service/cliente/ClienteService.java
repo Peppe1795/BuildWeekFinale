@@ -40,18 +40,18 @@ public class ClienteService {
 
 	public Cliente findByIdAndUpdate(UUID id, ClienteRequestPayload body) throws NotFoundException {
 		Cliente found = this.findById(id);
-		found.setRagione_sociale(body.getRagione_sociale());
-		found.setPartita_iva(body.getPartita_iva());
+		found.setRagioneSociale(body.getRagione_sociale());
+		found.setPartitaIva(body.getPartita_iva());
 		found.setEmail(body.getEmail());
-		found.setData_inserimento(body.getData_inserimento());
-		found.setData_ultimoContatto(body.getData_ultimoContatto());
-		found.setFatturato_annuale(body.getFatturato_annuale());
+		found.setDataInserimento(body.getData_inserimento());
+		found.setDataUltimoContatto(body.getData_ultimoContatto());
+		found.setFatturatoAnnuale(body.getFatturato_annuale());
 		found.setPec(body.getPec());
 		found.setTelefono(body.getTelefono());
-		found.setEmail_contatto(body.getEmail_contatto());
-		found.setNome_contatto(body.getNome_contatto());
-		found.setCognome_contatto(body.getCognome_contatto());
-		found.setTelefono_contatto(body.getTelefono_contatto());
+		found.setEmailContatto(body.getEmail_contatto());
+		found.setNomeContatto(body.getNome_contatto());
+		found.setCognomeContatto(body.getCognome_contatto());
+		found.setTelefonoContatto(body.getTelefono_contatto());
 		found.setTipo_cliente(body.getTipo_cliente());
 
 		return clienteRepo.save(found);
@@ -63,22 +63,22 @@ public class ClienteService {
 	}
 
 	public Cliente findByFatturato_annuale(double fatturato_annuale) {
-		return clienteRepo.findByFatturato_annuale(fatturato_annuale).orElseThrow(() -> new NotFoundException(
+		return clienteRepo.findByFatturatoAnnuale(fatturato_annuale).orElseThrow(() -> new NotFoundException(
 				"Cliente con fatturato annuale pari a: " + fatturato_annuale + " non trovato"));
 	}
 
-	public Cliente findByData_inserimento(LocalDate data_inserimento) {
-		return clienteRepo.findByData_inserimento(data_inserimento).orElseThrow(
-				() -> new NotFoundException("Cliente con data di inserimento: " + data_inserimento + " non trovato"));
+	public Cliente findByData_inserimento(LocalDate dataInserimento) {
+		return clienteRepo.findByDataInserimento(dataInserimento).orElseThrow(
+				() -> new NotFoundException("Cliente con data di inserimento: " + dataInserimento + " non trovato"));
 	}
 
-	public Cliente findByData_ultimoContatto(LocalDate data_ultimoContatto) {
-		return clienteRepo.findByData_ultimoContatto(data_ultimoContatto).orElseThrow(() -> new NotFoundException(
-				"Cliente con data di ultimo contatto: " + data_ultimoContatto + " non trovato"));
+	public Cliente findByData_ultimoContatto(LocalDate dataUltimoContatto) {
+		return clienteRepo.findByDataUltimoContatto(dataUltimoContatto).orElseThrow(() -> new NotFoundException(
+				"Cliente con data di ultimo contatto: " + dataUltimoContatto + " non trovato"));
 	}
 
 	public Cliente findByNome_contatto(String nome_contatto) {
-		return clienteRepo.findByNome_contatto(nome_contatto)
+		return clienteRepo.findByNomeContatto(nome_contatto)
 				.orElseThrow(() -> new NotFoundException("Cliente con nome: " + nome_contatto + " non trovato"));
 	}
 }

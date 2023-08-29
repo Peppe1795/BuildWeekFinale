@@ -26,18 +26,18 @@ public class Cliente {
 	@Id
 	@GeneratedValue
 	private UUID clienteId;
-	private String ragione_sociale;
-	private long partita_iva;
+	private String ragioneSociale;
+	private long partitaIva;
 	private String email;
-	private LocalDate data_inserimento;
-	private LocalDate data_ultimoContatto;
-	private double fatturato_annuale;
+	private LocalDate dataInserimento;
+	private LocalDate dataUltimoContatto;
+	private double fatturatoAnnuale;
 	private String pec;
 	private int telefono;
-	private String email_contatto;
-	private String nome_contatto;
-	private String cognome_contatto;
-	private String telefono_contatto;
+	private String emailContatto;
+	private String nomeContatto;
+	private String cognomeContatto;
+	private String telefonoContatto;
 	@Enumerated(EnumType.STRING)
 	private Tipo_cliente tipo_cliente;
 	@OneToMany
@@ -48,18 +48,18 @@ public class Cliente {
 	public Cliente(String ragione_sociale, long partita_iva, String email, LocalDate data_inserimento,
 			LocalDate data_ultimoContatto, double fatturato_annuale, String pec, int telefono, String email_contatto,
 			String nome_contatto, String cognome_contatto, String telefono_contatto, Tipo_cliente tipo_cliente) {
-		this.ragione_sociale = ragione_sociale;
-		this.partita_iva = partita_iva;
+		this.ragioneSociale = ragione_sociale;
+		this.partitaIva = partita_iva;
 		this.email = email;
-		this.data_inserimento = data_inserimento;
-		this.data_ultimoContatto = data_ultimoContatto;
-		this.fatturato_annuale = fatturato_annuale;
+		this.dataInserimento = data_inserimento;
+		this.dataUltimoContatto = data_ultimoContatto;
+		this.fatturatoAnnuale = fatturato_annuale;
 		this.pec = pec;
 		this.telefono = telefono;
-		this.email_contatto = email_contatto;
-		this.nome_contatto = nome_contatto;
-		this.cognome_contatto = cognome_contatto;
-		this.telefono_contatto = telefono_contatto;
+		this.emailContatto = email_contatto;
+		this.nomeContatto = nome_contatto;
+		this.cognomeContatto = cognome_contatto;
+		this.telefonoContatto = telefono_contatto;
 		this.tipo_cliente = tipo_cliente;
 	}
 

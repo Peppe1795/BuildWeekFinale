@@ -29,7 +29,7 @@ public class Fattura {
 	private BigDecimal importo;
 	private int numero;
 	@Enumerated(EnumType.STRING)
-	private Stato_fattura stato_fattura;
+	private Stato_fattura statoFattura;
 	@ManyToOne
 	private Cliente cliente;
 
@@ -38,7 +38,7 @@ public class Fattura {
 		this.data = data;
 		this.importo = importo;
 		this.numero = numero;
-		this.stato_fattura = stato_fattura;
+		this.statoFattura = stato_fattura;
 	}
 
 }
