@@ -16,12 +16,10 @@ public class JWTTools {
 	private String secret;
 
 	public String creaToken(Utente user) {
-		String token = Jwts.builder().setSubject(user.getUserId().toString()) // A chi appartiene il token (Subject)
-				.setIssuedAt(new Date(System.currentTimeMillis())) // Quando è stato emesso il token (IAT - Issued At)
-				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7)) // Quando scadrà il
-				// token
-				.signWith(Keys.hmacShaKeyFor(secret.getBytes())) // Genero la firma del token
-				.compact(); // Crea il token con quanto detto prima
+		String token = Jwts.builder().setSubject(user.getUserId().toString())
+				.setIssuedAt(new Date(System.currentTimeMillis()))
+				.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24 * 7))
+				.signWith(Keys.hmacShaKeyFor(secret.getBytes())).compact();
 		return token;
 	}
 
@@ -36,7 +34,7 @@ public class JWTTools {
 
 	public String extractSubject(String token) {
 		return Jwts.parserBuilder().setSigningKey(Keys.hmacShaKeyFor(secret.getBytes())).build().parseClaimsJws(token)
-				.getBody().getSubject(); // sub id utente
+				.getBody().getSubject();
 
 	}
 }
