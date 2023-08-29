@@ -29,7 +29,7 @@ public class UtenteRunner implements CommandLineRunner {
 			String email = faker.internet().emailAddress();
 			String password = faker.lorem().characters(6, 12);
 			UtenteRequestPayload utente = new UtenteRequestPayload(name, surname, username, email, password);
-			utenteService.creaUtente(utente);
+			// utenteService.creaUtente(utente);
 
 		}
 	}

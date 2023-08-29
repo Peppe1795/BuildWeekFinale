@@ -26,7 +26,7 @@ public class UtenteService {
 		utenteRepo.findByEmail(body.getEmail()).ifPresent(u -> {
 			throw new BadRequestException("l'email inserita non è valida");
 		});
-		Utente newUtente = new Utente(body.getNome(), body.getCognome(), body.getUserName(), body.getEmail(),
+		Utente newUtente = new Utente(body.getNome(), body.getCognome(), body.getUsername(), body.getEmail(),
 				body.getPassword(), Ruolo.USER);
 		return utenteRepo.save(newUtente);
 	}
@@ -45,7 +45,7 @@ public class UtenteService {
 		Utente found = this.findById(id);
 		found.setNome(body.getNome());
 		found.setCognome(body.getCognome());
-		found.setUsername(body.getUserName());
+		found.setUsername(body.getUsername());
 		found.setEmail(body.getEmail());
 		found.setPassword(body.getPassword());
 		return utenteRepo.save(found);
@@ -59,5 +59,10 @@ public class UtenteService {
 	public Utente findByEmail(String email) {
 		return utenteRepo.findByEmail(email)
 				.orElseThrow(() -> new NotFoundException("Utente con email " + email + " non trovato"));
+	}
+
+	public Utente findByUsername(String username) {
+		return utenteRepo.findByUsername(username)
+				.orElseThrow(() -> new NotFoundException("Username" + username + "non corrispondente"));
 	}
 }

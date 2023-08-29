@@ -37,15 +37,14 @@ public class JWTFilter extends OncePerRequestFilter {
 
 		jTools.verificaToken(token);// verifico token
 		String id = jTools.extractSubject(token);
-		Utente utenteCorrente = utenteService.findById(UUID.fromString(id));// effettuo ricerca per id
+		Utente utenteCorrente = utenteService.findById(UUID.fromString(id));
 
 		UsernamePasswordAuthenticationToken autorizzationToken = new UsernamePasswordAuthenticationToken(utenteCorrente,
 				null, utenteCorrente.getAuthorities());
 
 		SecurityContextHolder.getContext().setAuthentication(autorizzationToken);
 
-		filterChain.doFilter(request, response);// posso andare avanti
-		// se avro problemi l'errore sarà 401..
+		filterChain.doFilter(request, response);
 
 	}
 
