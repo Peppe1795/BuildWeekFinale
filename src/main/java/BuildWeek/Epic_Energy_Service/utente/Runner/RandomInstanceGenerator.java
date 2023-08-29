@@ -6,6 +6,7 @@ import java.util.Locale;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.github.javafaker.Faker;
@@ -31,6 +32,8 @@ public class RandomInstanceGenerator {
 	private final UtenteService us;
 	Faker faker = new Faker(new Locale("it"));
 	Random rnd = new Random();
+	@Autowired
+	PasswordEncoder bcrypt;
 
 	@Autowired
 	public RandomInstanceGenerator(ClienteService cs, IndirizzoService is, ComuneService cos, UtenteService us) {
@@ -48,7 +51,7 @@ public class RandomInstanceGenerator {
 				String surname = faker.name().lastName();
 				String username = faker.name().username();
 				String email = faker.internet().emailAddress();
-				String password = faker.lorem().characters(6, 12);
+				String password = bcrypt.encode(faker.lorem().characters(6, 12));
 				UtenteRequestPayload utente = new UtenteRequestPayload(name, surname, username, email, password);
 
 				us.creaUtente(utente);
@@ -91,7 +94,7 @@ public class RandomInstanceGenerator {
 				Cliente cliente = cs.create(rndCliente);
 				cliente.setSedeLegale(this.randomIndirizzoGenerator(cliente));
 				cliente.setSedeOperativa(this.randomIndirizzoGenerator(cliente));
-				return cs.update(cliente);
+				cs.update(cliente);
 			} catch (Exception e) {
 				e.printStackTrace();
 				System.out.println("Errore nella generazione dei clienti!");
