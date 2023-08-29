@@ -27,7 +27,6 @@ public class Indirizzo {
 	private Cliente cliente;
 
 	public Indirizzo(String via, String numero_civico, String località, int cap) {
-		super();
 		this.via = via;
 		this.numero_civico = numero_civico;
 		this.località = località;

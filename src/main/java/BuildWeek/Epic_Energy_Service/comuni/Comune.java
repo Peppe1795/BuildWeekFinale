@@ -2,11 +2,15 @@ package BuildWeek.Epic_Energy_Service.comuni;
 
 import java.util.UUID;
 
+import BuildWeek.Epic_Energy_Service.province.Provincia;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -15,6 +19,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class Comune {
 	@Id
 	@GeneratedValue
@@ -23,6 +28,10 @@ public class Comune {
 	private int progressivo_comune;
 	private String denominazione;
 	private String nome_provincia;
+
+	@ManyToOne
+	@JoinColumn(name = "provincia_id")
+	private Provincia provincia;
 
 	public Comune(int codice_provincia, int progressivo_comune, String denominazione, String nome_provincia) {
 		this.codice_provincia = codice_provincia;
