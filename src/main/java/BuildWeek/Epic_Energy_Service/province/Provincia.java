@@ -21,9 +21,9 @@ public class Provincia {
 	String nome_regione;
 
 	public Provincia(String sigla, String nome, String nome_regione) {
-//		this.sigla = sigla;
-//		this.nome = nome;
-//		this.nome_regione = nome_regione;
+		this.sigla = sigla;
+		this.nome = nome;
+		this.nome_regione = nome_regione;
 	}
 
 }
