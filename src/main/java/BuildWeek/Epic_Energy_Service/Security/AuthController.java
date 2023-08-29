@@ -34,7 +34,7 @@ public class AuthController {
 
 	public ResponseEntity<String> login(@RequestBody UtenteRequestPayload body) {
 
-		Utente utente = utenteService.findByEmail(body.getUser_name());
+		Utente utente = utenteService.findByEmail(body.getEmail());
 
 		if (body.getPassword().equals(utente.getPassword())) {
 

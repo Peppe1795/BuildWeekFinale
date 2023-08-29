@@ -21,7 +21,7 @@ public class Fattura {
 
 	@Id
 	@GeneratedValue
-	private UUID fattura_id;
+	private UUID fatturaId;
 	private int anno;
 	private LocalDate data;
 	private BigDecimal importo;

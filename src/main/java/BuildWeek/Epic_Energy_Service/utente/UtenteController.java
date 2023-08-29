@@ -28,26 +28,19 @@ public class UtenteController {
 	}
 
 	@GetMapping
-	public Page<Utente> getUsers(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+	public Page<Utente> getUtenti(@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "userId") String sortBy) {
 		return utenteService.find(page, size, sortBy);
 	}
 
-//	@GetMapping
-//	public Page<Utente> getUsers(@RequestParam(defaultValue = "0") int page,
-//			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
-//		Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
-//		return utenteService.find(page, size, sortBy);
-//	}
-
-	@GetMapping("/{user_Id}")
-	public Utente findById(@PathVariable UUID userId) {
+	@GetMapping("/{userId}")
+	public Utente findUtentiById(@PathVariable UUID userId) {
 		return utenteService.findById(userId);
 
 	}
 
-	@PutMapping("/{user_Id}")
-	public Utente updateUser(@PathVariable UUID userId, @RequestBody UtenteRequestPayload body) {
+	@PutMapping("/{userId}")
+	public Utente updateUtenti(@PathVariable UUID userId, @RequestBody UtenteRequestPayload body) {
 		return utenteService.findByIdAndUpdate(userId, body);
 	}
 

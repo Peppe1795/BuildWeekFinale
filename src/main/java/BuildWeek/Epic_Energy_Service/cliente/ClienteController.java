@@ -28,7 +28,7 @@ public class ClienteController {
 
 	@GetMapping
 	public Page<Cliente> getClienti(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "clienteId") String sortBy) {
 		return clienteSrv.find(page, size, sortBy);
 	}
 

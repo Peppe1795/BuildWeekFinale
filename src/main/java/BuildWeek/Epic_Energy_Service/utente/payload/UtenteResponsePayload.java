@@ -8,5 +8,5 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class UtenteResponsePayload {
-	UUID user_Id;
+	UUID userId;
 }

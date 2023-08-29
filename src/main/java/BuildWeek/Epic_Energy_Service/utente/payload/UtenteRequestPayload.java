@@ -8,7 +8,7 @@ import lombok.Getter;
 public class UtenteRequestPayload {
 	private String nome;
 	private String cognome;
-	private String user_name;
+	private String userName;
 	private String email;
 	private String password;
 }

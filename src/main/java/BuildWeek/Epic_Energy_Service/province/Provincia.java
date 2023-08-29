@@ -11,7 +11,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name = "province")
+@Table(name = "provincia")
 @Getter
 @Setter
 @ToString
@@ -24,7 +24,6 @@ public class Provincia {
 	String nome_regione;
 
 	public Provincia(String sigla, String nome_provincia, String nome_regione) {
-		super();
 		this.sigla = sigla;
 		this.nome_provincia = nome_provincia;
 		this.nome_regione = nome_regione;

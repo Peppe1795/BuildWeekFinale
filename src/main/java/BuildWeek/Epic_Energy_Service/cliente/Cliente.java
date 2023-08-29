@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 public class Cliente {
 	@Id
 	@GeneratedValue
-	private UUID cliente_id;
+	private UUID clienteId;
 	private String ragione_sociale;
 	private long partita_iva;
 	private String email;
