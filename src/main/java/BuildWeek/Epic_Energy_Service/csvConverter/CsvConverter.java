@@ -51,7 +51,7 @@ public class CsvConverter {
 				String nome_provincia = parts[3];
 
 				Comune comune = new Comune(codice_provincia, progressivo_comune, denominazione, nome_provincia);
-				cs.creaComune(comune);
+				cs.saveComune(comune);
 			}
 
 		}

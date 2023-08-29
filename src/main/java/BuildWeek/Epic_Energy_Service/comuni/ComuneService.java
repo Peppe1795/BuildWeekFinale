@@ -22,7 +22,7 @@ public class ComuneService {
 		this.cr = cr;
 	}
 
-	public Comune creaComune(Comune comune) {
+	public Comune saveComune(Comune comune) {
 		return cr.save(comune);
 	}
 

@@ -39,7 +39,7 @@ public class ComuneController {
 
 	@PostMapping
 	public Comune createComune(Comune comune) {
-		return cs.creaComune(comune);
+		return cs.saveComune(comune);
 	}
 
 }

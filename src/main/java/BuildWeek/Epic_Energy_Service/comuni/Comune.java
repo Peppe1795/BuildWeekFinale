@@ -25,7 +25,6 @@ public class Comune {
 	private String nome_provincia;
 
 	public Comune(int codice_provincia, int progressivo_comune, String denominazione, String nome_provincia) {
-		super();
 		this.codice_provincia = codice_provincia;
 		this.progressivo_comune = progressivo_comune;
 		this.denominazione = denominazione;
