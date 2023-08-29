@@ -25,18 +25,19 @@ public class Indirizzo {
 	private String numero_civico;
 	private String località;
 	private int cap;
-
 	@ManyToOne
 	private Cliente cliente;
 
 	@ManyToOne
 	private Comune comune;
 
-	public Indirizzo(String via, String numero_civico, String località, int cap) {
+	public Indirizzo(String via, String numero_civico, String località, int cap, Cliente cliente, Comune comune) {
 		this.via = via;
 		this.numero_civico = numero_civico;
 		this.località = località;
 		this.cap = cap;
+		this.cliente = cliente;
+		this.comune = comune;
 	}
 
 }

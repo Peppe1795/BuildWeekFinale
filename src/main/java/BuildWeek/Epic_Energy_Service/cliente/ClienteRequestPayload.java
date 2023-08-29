@@ -17,10 +17,11 @@ public class ClienteRequestPayload {
 	private LocalDate data_ultimoContatto;
 	private double fatturato_annuale;
 	private String pec;
-	private int telefono;
+	private String telefono;
 	private String email_contatto;
 	private String nome_contatto;
 	private String cognome_contatto;
-	private String telefono_contatto;
+	private long telefono_contatto;
 	private Tipo_cliente tipo_cliente;
+
 }

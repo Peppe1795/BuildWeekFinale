@@ -19,12 +19,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Utente")
 @Data
 @NoArgsConstructor
+@ToString
 @JsonIgnoreProperties({ "password", "accountNonExpired", "authorities", "credentialsNonExpired", "accountNonLocked" })
 public class Utente implements UserDetails {
 
