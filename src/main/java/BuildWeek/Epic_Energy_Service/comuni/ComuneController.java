@@ -17,7 +17,6 @@ public class ComuneController {
 
 	@Autowired
 	public ComuneController(ComuneService cs) {
-		super();
 		this.cs = cs;
 	}
 

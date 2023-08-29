@@ -8,7 +8,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,8 +29,8 @@ public class Indirizzo {
 	@ManyToOne
 	private Cliente cliente;
 
-	@OneToMany
-	private Comune coumne;
+	@ManyToOne
+	private Comune comune;
 
 	public Indirizzo(String via, String numero_civico, String località, int cap) {
 		this.via = via;

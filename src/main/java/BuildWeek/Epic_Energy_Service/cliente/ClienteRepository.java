@@ -7,11 +7,11 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
-	Optional<Cliente> findByFatturato_annuale(double fatturato_annuale);
+	Optional<Cliente> findByFatturatoAnnuale(double fatturatoAnnuale);
 
-	Optional<Cliente> findByData_inserimento(LocalDate data_inserimento);
+	Optional<Cliente> findByDataInserimento(LocalDate dataInserimento);
 
-	Optional<Cliente> findByData_ultimoContatto(LocalDate data_ultimoContatto);
+	Optional<Cliente> findByDataUltimoContatto(LocalDate dataIltimoContatto);
 
-	Optional<Cliente> findByNome_contatto(String nome_contatto);
+	Optional<Cliente> findByNomeContatto(String nomeContatto);
 }
