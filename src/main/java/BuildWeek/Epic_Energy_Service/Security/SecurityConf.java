@@ -17,9 +17,12 @@ public class SecurityConf {
 	@Autowired
 	JWTFilter jwtFilter;
 
+	@Autowired
+	CorsFilter corsFilter;
+
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.cors(c -> c.disable());
+
 		http.csrf(c -> c.disable());
 
 		http.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
@@ -28,6 +31,7 @@ public class SecurityConf {
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
 
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+		http.addFilterBefore(corsFilter, JWTFilter.class);
 
 		return http.build();
 	}
