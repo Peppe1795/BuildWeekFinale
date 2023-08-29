@@ -31,7 +31,7 @@ public class Indirizzo {
 	private Cliente cliente;
 
 	@OneToMany
-	private Comune coumne;
+	private Comune comune;
 
 	public Indirizzo(String via, String numero_civico, String località, int cap) {
 		this.via = via;
