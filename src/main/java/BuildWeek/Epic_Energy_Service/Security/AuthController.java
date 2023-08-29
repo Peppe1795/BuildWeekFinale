@@ -53,7 +53,7 @@ public class AuthController {
 			return new ResponseEntity<>(token, HttpStatus.OK);
 
 		} else {
-			throw new UnauthorizedException("Credenziali non valide");
+			throw new UnauthorizedException("Credenziali non valide, verifica che username o l'email siano corrette");
 		}
 	}
 }
