@@ -1,5 +1,6 @@
 package BuildWeek.Epic_Energy_Service.cliente;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,25 @@ public class ClienteService {
 	public void findByIdAndDelete(UUID id) throws NotFoundException {
 		Cliente found = this.findById(id);
 		clienteRepo.delete(found);
+	}
+
+	public Cliente findByFatturato_annuale(double fatturato_annuale) {
+		return clienteRepo.findByFatturato_annuale(fatturato_annuale).orElseThrow(() -> new NotFoundException(
+				"Cliente con fatturato annuale pari a: " + fatturato_annuale + " non trovato"));
+	}
+
+	public Cliente findByData_inserimento(LocalDate data_inserimento) {
+		return clienteRepo.findByData_inserimento(data_inserimento).orElseThrow(
+				() -> new NotFoundException("Cliente con data di inserimento: " + data_inserimento + " non trovato"));
+	}
+
+	public Cliente findByData_ultimoContatto(LocalDate data_ultimoContatto) {
+		return clienteRepo.findByData_ultimoContatto(data_ultimoContatto).orElseThrow(() -> new NotFoundException(
+				"Cliente con data di ultimo contatto: " + data_ultimoContatto + " non trovato"));
+	}
+
+	public Cliente findByNome_contatto(String nome_contatto) {
+		return clienteRepo.findByNome_contatto(nome_contatto)
+				.orElseThrow(() -> new NotFoundException("Cliente con nome: " + nome_contatto + " non trovato"));
 	}
 }
