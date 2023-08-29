@@ -23,7 +23,7 @@ public class IndirizzoService {
 
 	public Indirizzo create(IndirizzoRequestPayload body) {
 		Indirizzo nuovoIndirizzo = new Indirizzo(body.getVia(), body.getNumero_civico(), body.getLocalità(),
-				body.getCap());
+				body.getCap(), body.getCliente(), body.getComune());
 		return indirizzoRepo.save(nuovoIndirizzo);
 	}
 

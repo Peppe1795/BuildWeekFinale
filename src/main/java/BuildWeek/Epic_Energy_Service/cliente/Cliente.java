@@ -11,6 +11,7 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -33,21 +34,23 @@ public class Cliente {
 	private LocalDate dataUltimoContatto;
 	private double fatturatoAnnuale;
 	private String pec;
-	private int telefono;
+	private String telefono;
 	private String emailContatto;
 	private String nomeContatto;
 	private String cognomeContatto;
-	private String telefonoContatto;
+	private long telefonoContatto;
 	@Enumerated(EnumType.STRING)
 	private Tipo_cliente tipo_cliente;
-	@OneToMany
-	private List<Indirizzo> indirizzi;
+	@ManyToOne
+	private Indirizzo sedeLegale;
+	@ManyToOne
+	private Indirizzo sedeOperativa;
 	@OneToMany
 	private List<Fattura> fatture;
 
 	public Cliente(String ragione_sociale, long partita_iva, String email, LocalDate data_inserimento,
-			LocalDate data_ultimoContatto, double fatturato_annuale, String pec, int telefono, String email_contatto,
-			String nome_contatto, String cognome_contatto, String telefono_contatto, Tipo_cliente tipo_cliente) {
+			LocalDate data_ultimoContatto, double fatturato_annuale, String pec, String telefono, String email_contatto,
+			String nome_contatto, String cognome_contatto, long telefono_contatto, Tipo_cliente tipo_cliente) {
 		this.ragioneSociale = ragione_sociale;
 		this.partitaIva = partita_iva;
 		this.email = email;

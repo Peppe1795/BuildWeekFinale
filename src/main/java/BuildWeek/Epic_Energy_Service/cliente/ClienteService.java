@@ -81,4 +81,25 @@ public class ClienteService {
 		return clienteRepo.findByNomeContatto(nome_contatto)
 				.orElseThrow(() -> new NotFoundException("Cliente con nome: " + nome_contatto + " non trovato"));
 	}
+
+	public Cliente update(Cliente cliente) {
+
+		cliente.setRagioneSociale(cliente.getRagioneSociale());
+		cliente.setPartitaIva(cliente.getPartitaIva());
+		cliente.setEmail(cliente.getEmail());
+		cliente.setDataInserimento(cliente.getDataInserimento());
+		cliente.setDataUltimoContatto(cliente.getDataUltimoContatto());
+		cliente.setFatturatoAnnuale(cliente.getFatturatoAnnuale());
+		cliente.setPec(cliente.getPec());
+		cliente.setTelefono(cliente.getTelefono());
+		cliente.setEmailContatto(cliente.getEmailContatto());
+		cliente.setNomeContatto(cliente.getNomeContatto());
+		cliente.setCognomeContatto(cliente.getCognomeContatto());
+		cliente.setTelefonoContatto(cliente.getTelefonoContatto());
+		cliente.setTipo_cliente(cliente.getTipo_cliente());
+		cliente.setSedeLegale(cliente.getSedeLegale());
+		cliente.setSedeOperativa(cliente.getSedeOperativa());
+
+		return clienteRepo.save(cliente);
+	}
 }
