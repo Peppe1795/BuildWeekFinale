@@ -36,23 +36,25 @@ public class AuthController {
 		return created;
 	}
 
-	@SuppressWarnings("null")
 	@PostMapping("/login")
 
 	public ResponseEntity<String> login(@RequestBody UtenteLoginPayload body) {
 
 		Utente utente = null;
-		if (body.getEmail().contains("@")) {
+
+		if (body.getEmail() != null) {
 			utente = utenteService.findByEmail(body.getEmail());
 		} else {
 			utente = utenteService.findByUsername(body.getUsername());
 		}
 
-		if (bcrypt.matches(body.getPassword(), utente.getPassword())) {
+		if (utente != null && bcrypt.matches(body.getPassword(), utente.getPassword())) {
 			String token = jwtTools.creaToken(utente);
 			return new ResponseEntity<>(token, HttpStatus.OK);
+
 		} else {
-			throw new UnauthorizedException("Credenziali non valide");
+			throw new UnauthorizedException(
+					"Credenziali non valide, verifica che la password o Email ed Username siano corrette");
 		}
 	}
 }
