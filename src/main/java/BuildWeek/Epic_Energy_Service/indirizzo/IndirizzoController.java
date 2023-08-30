@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/indirizzo")
+@RequestMapping("/utenti/indirizzo")
 public class IndirizzoController {
 
 	private final IndirizzoService indirizzoSrv;

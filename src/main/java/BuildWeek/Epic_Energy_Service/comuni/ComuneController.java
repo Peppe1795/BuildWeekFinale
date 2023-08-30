@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/comuni")
+@RequestMapping("/utenti/comuni")
 public class ComuneController {
 	private final ComuneService cs;
 

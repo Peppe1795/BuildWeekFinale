@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.github.javafaker.Faker;
 
+import BuildWeek.Epic_Energy_Service.Exception.BadRequestException;
 import BuildWeek.Epic_Energy_Service.cliente.Cliente;
 import BuildWeek.Epic_Energy_Service.cliente.ClienteRequestPayload;
 import BuildWeek.Epic_Energy_Service.cliente.ClienteService;
@@ -64,7 +65,7 @@ public class RandomInstanceGenerator {
 				UtenteRequestPayload utente = new UtenteRequestPayload(name, surname, username, email, password, role);
 
 				us.creaUtente(utente);
-			} catch (Exception e) {
+			} catch (BadRequestException e) {
 				e.printStackTrace();
 				System.out.println("Errore nella generazione degli utenti!");
 			}
@@ -104,7 +105,7 @@ public class RandomInstanceGenerator {
 				cliente.setSedeLegale(this.randomIndirizzoGenerator(cliente));
 				cliente.setSedeOperativa(this.randomIndirizzoGenerator(cliente));
 				cs.update(cliente);
-			} catch (Exception e) {
+			} catch (BadRequestException e) {
 				e.printStackTrace();
 				System.out.println("Errore nella generazione dei clienti!");
 
@@ -161,7 +162,7 @@ public class RandomInstanceGenerator {
 						cliente);
 				fs.create(rndFattura);
 
-			} catch (Exception e) {
+			} catch (BadRequestException e) {
 				e.printStackTrace();
 				System.out.println("Errore nella generazione delle fatture!");
 			}

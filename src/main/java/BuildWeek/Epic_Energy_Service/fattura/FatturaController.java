@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/fattura")
+@RequestMapping("/utenti/fattura")
 public class FatturaController {
 
 	private final FatturaService fatturaSrv;

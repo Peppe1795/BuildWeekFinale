@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/province")
+@RequestMapping("/utenti/province")
 public class ProvinciaController {
 	private final ProvinciaService ps;
 
