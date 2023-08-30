@@ -33,11 +33,12 @@ public class Fattura {
 	@ManyToOne
 	private Cliente cliente;
 
-	public Fattura(int anno, LocalDate data, double importo, Stato_fattura stato_fattura, Cliente cliente) {
+	public Fattura(int anno, LocalDate data, double importo, Stato_fattura statoFattura, Cliente cliente) {
+
 		this.anno = anno;
 		this.data = data;
 		this.importo = importo;
-		this.statoFattura = stato_fattura;
+		this.statoFattura = statoFattura;
 		this.cliente = cliente;
 	}
 

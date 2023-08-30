@@ -11,16 +11,10 @@ public class BusinessRunner implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
+//		rndGenerator.randomUtenteGenerator(20);
+//		rndGenerator.randomClienteGenerator(100);
+//		rndGenerator.randomFattureGenerator(10);
 
 	}
-
-//	@Override
-//	public void run(String... args) throws Exception {
-////		rndGenerator.randomUtenteGenerator(20);
-////		rndGenerator.randomClienteGenerator(100);
-////		rndGenerator.randomFattureGenerator(10);
-//
-//	}
 
 }

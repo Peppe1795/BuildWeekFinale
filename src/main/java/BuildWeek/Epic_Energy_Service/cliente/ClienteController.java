@@ -34,8 +34,8 @@ public class ClienteController {
 		return clienteSrv.find(page, size, sortBy);
 	}
 
-	@GetMapping("/ordinati")
-	public ResponseEntity<List<Cliente>> getListaClientiOrdinati(@RequestParam String criterio) {
+	@GetMapping("/{ordinati}")
+	public ResponseEntity<List<Cliente>> getListaClientiOrdinati(@RequestParam(name = "ordinati") String criterio) {
 		List<Cliente> clientiOrdinati = clienteSrv.getListaClientiOrdinati(criterio);
 		return ResponseEntity.ok(clientiOrdinati);
 	}
@@ -50,7 +50,7 @@ public class ClienteController {
 
 	@GetMapping("/{clienteId}")
 	public Cliente findById(@PathVariable UUID clienteId) {
-		return clienteSrv.findById(clienteId);
+		return clienteSrv.findByClienteId(clienteId);
 
 	}
 

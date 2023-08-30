@@ -39,7 +39,7 @@ public class IndirizzoService {
 	public Indirizzo findByIdAndUpdate(UUID id, IndirizzoRequestPayload body) throws NotFoundException {
 		Indirizzo found = this.findById(id);
 		found.setVia(body.getVia());
-		found.setNumero_civico(body.getNumero_civico());
+		found.setNumeroCivico(body.getNumero_civico());
 		found.setLocalità(body.getLocalità());
 		found.setCap(body.getCap());
 		found.setCliente(body.getCliente());

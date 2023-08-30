@@ -15,12 +15,14 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "clienti")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cliente {
@@ -48,22 +50,32 @@ public class Cliente {
 	@OneToMany
 	private List<Fattura> fatture;
 
-	public Cliente(String ragione_sociale, long partita_iva, String email, LocalDate data_inserimento,
-			LocalDate data_ultimoContatto, double fatturato_annuale, String pec, String telefono, String email_contatto,
-			String nome_contatto, String cognome_contatto, long telefono_contatto, Tipo_cliente tipo_cliente) {
-		this.ragioneSociale = ragione_sociale;
-		this.partitaIva = partita_iva;
+	public Cliente(String ragioneSociale, long partitaIva, String email, LocalDate dataInserimento,
+			LocalDate dataUltimoContatto, double fatturatoAnnuale, String pec, String telefono, String emailContatto,
+			String nomeContatto, String cognomeContatto, long telefonoContatto, Tipo_cliente tipoCliente) {
+		this.ragioneSociale = ragioneSociale;
+		this.partitaIva = partitaIva;
 		this.email = email;
-		this.dataInserimento = data_inserimento;
-		this.dataUltimoContatto = data_ultimoContatto;
-		this.fatturatoAnnuale = fatturato_annuale;
+		this.dataInserimento = dataInserimento;
+		this.dataUltimoContatto = dataUltimoContatto;
+		this.fatturatoAnnuale = fatturatoAnnuale;
 		this.pec = pec;
 		this.telefono = telefono;
-		this.emailContatto = email_contatto;
-		this.nomeContatto = nome_contatto;
-		this.cognomeContatto = cognome_contatto;
-		this.telefonoContatto = telefono_contatto;
-		this.tipo_cliente = tipo_cliente;
+		this.emailContatto = emailContatto;
+		this.nomeContatto = nomeContatto;
+		this.cognomeContatto = cognomeContatto;
+		this.telefonoContatto = telefonoContatto;
+		this.tipo_cliente = tipoCliente;
+	}
+
+	@Override
+	public String toString() {
+		return "Cliente [clienteId=" + clienteId + ", ragioneSociale=" + ragioneSociale + ", partitaIva=" + partitaIva
+				+ ", email=" + email + ", dataInserimento=" + dataInserimento + ", dataUltimoContatto="
+				+ dataUltimoContatto + ", fatturatoAnnuale=" + fatturatoAnnuale + ", pec=" + pec + ", telefono="
+				+ telefono + ", emailContatto=" + emailContatto + ", nomeContatto=" + nomeContatto
+				+ ", cognomeContatto=" + cognomeContatto + ", telefonoContatto=" + telefonoContatto + ", tipo_cliente="
+				+ tipo_cliente + "]";
 	}
 
 }

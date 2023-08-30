@@ -1,7 +1,5 @@
 package BuildWeek.Epic_Energy_Service.fattura;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -29,7 +27,7 @@ public class FatturaController {
 
 	@GetMapping
 	public Page<Fattura> getFattura(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "clienteId") String sortBy) {
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "numeroFattura") String sortBy) {
 		return fatturaSrv.find(page, size, sortBy);
 	}
 
@@ -41,21 +39,21 @@ public class FatturaController {
 		return created;
 	}
 
-	@GetMapping("/{fatturaId}")
-	public Fattura findById(@PathVariable UUID fatturaId) {
-		return fatturaSrv.findById(fatturaId);
+	@GetMapping("/{numeroFattura}")
+	public Fattura findById(@PathVariable int numeroFattura) {
+		return fatturaSrv.findById(numeroFattura);
 
 	}
 
-	@PutMapping("/{fatturaId}")
-	public Fattura updateFattura(@PathVariable UUID fatturaId, @RequestBody FatturaRequestPayload body) {
-		return fatturaSrv.findByIdAndUpdate(fatturaId, body);
+	@PutMapping("/{numeroFattura}")
+	public Fattura updateFattura(@PathVariable int numeroFattura, @RequestBody FatturaRequestPayload body) {
+		return fatturaSrv.findByIdAndUpdate(numeroFattura, body);
 	}
 
-	@DeleteMapping("/{fatturaId}")
+	@DeleteMapping("/{numeroFattura}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteFattura(@PathVariable UUID fatturaId) {
-		fatturaSrv.findByIdAndDelete(fatturaId);
+	public void deleteFattura(@PathVariable int numeroFattura) {
+		fatturaSrv.findByIdAndDelete(numeroFattura);
 	}
 
 }

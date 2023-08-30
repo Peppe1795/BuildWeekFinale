@@ -35,12 +35,12 @@ public class ClienteService {
 		return clienteRepo.findAll(pageable);
 	}
 
-	public Cliente findById(UUID id) throws NotFoundException {
+	public Cliente findByClienteId(UUID id) throws NotFoundException {
 		return clienteRepo.findById(id).orElseThrow(() -> new NotFoundException(id));
 	}
 
 	public Cliente findByIdAndUpdate(UUID id, ClienteRequestPayload body) throws NotFoundException {
-		Cliente found = this.findById(id);
+		Cliente found = this.findByClienteId(id);
 		found.setRagioneSociale(body.getRagione_sociale());
 		found.setPartitaIva(body.getPartita_iva());
 		found.setEmail(body.getEmail());
@@ -59,7 +59,7 @@ public class ClienteService {
 	}
 
 	public void findByIdAndDelete(UUID id) throws NotFoundException {
-		Cliente found = this.findById(id);
+		Cliente found = this.findByClienteId(id);
 		clienteRepo.delete(found);
 	}
 
@@ -115,13 +115,13 @@ public class ClienteService {
 
 	public List<Cliente> getListaClientiOrdinati(String criterioOrdinamento) {
 		switch (criterioOrdinamento) {
-		case "nome":
-			return clienteRepo.findAllByOrderByNomeContatto();
-		case "fatturato":
+		case "ragione_sociale":
+			return clienteRepo.findAllByOrderByRagioneSociale();
+		case "fatturato_annuale":
 			return clienteRepo.findAllByOrderByFatturatoAnnuale();
-		case "dataInserimento":
+		case "data_inserimento":
 			return clienteRepo.findAllByOrderByDataInserimento();
-		case "dataUltimoContatto":
+		case "data_ultimoContatto":
 			return clienteRepo.findAllByOrderByDataUltimoContatto();
 //		case "provincia":
 //			return clienteRepo.findAllByOrderBySedeLegale_Provincia();

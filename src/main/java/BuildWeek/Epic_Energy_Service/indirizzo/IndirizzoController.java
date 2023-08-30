@@ -29,7 +29,7 @@ public class IndirizzoController {
 
 	@GetMapping
 	public Page<Indirizzo> getFattura(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "clienteId") String sortBy) {
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "indirizzoId") String sortBy) {
 		return indirizzoSrv.find(page, size, sortBy);
 	}
 

@@ -1,7 +1,5 @@
 package BuildWeek.Epic_Energy_Service.fattura;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,12 +30,12 @@ public class FatturaService {
 		return fatturaRepo.findAll(pageable);
 	}
 
-	public Fattura findById(UUID id) throws NotFoundException {
-		return fatturaRepo.findById(id).orElseThrow(() -> new NotFoundException(id));
+	public Fattura findById(int numeroFattura) throws NotFoundException {
+		return fatturaRepo.findById(numeroFattura).orElseThrow(() -> new NotFoundException(numeroFattura));
 	}
 
-	public Fattura findByIdAndUpdate(UUID id, FatturaRequestPayload body) throws NotFoundException {
-		Fattura found = this.findById(id);
+	public Fattura findByIdAndUpdate(int numeroFattura, FatturaRequestPayload body) throws NotFoundException {
+		Fattura found = this.findById(numeroFattura);
 		found.setAnno(body.getAnno());
 		found.setData(body.getData());
 		found.setImporto(body.getImporto());
@@ -47,8 +45,8 @@ public class FatturaService {
 		return fatturaRepo.save(found);
 	}
 
-	public void findByIdAndDelete(UUID id) throws NotFoundException {
-		Fattura found = this.findById(id);
+	public void findByIdAndDelete(int numeroFattura) throws NotFoundException {
+		Fattura found = this.findById(numeroFattura);
 		fatturaRepo.delete(found);
 	}
 }
