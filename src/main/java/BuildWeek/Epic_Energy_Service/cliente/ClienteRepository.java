@@ -10,13 +10,13 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
-	Optional<Cliente> findByFatturatoAnnuale(double fatturatoAnnuale);
+	Optional<Cliente> findByFatturatoAnnuale(double fatturato_annuale);
 
 	Optional<Cliente> findByDataInserimento(LocalDate dataInserimento);
 
-	Optional<Cliente> findByDataUltimoContatto(LocalDate dataIltimoContatto);
+	Optional<Cliente> findByDataUltimoContatto(LocalDate dataUltimoContatto);
 
-	Optional<Cliente> findByNomeContatto(String nomeContatto);
+	List<Cliente> findByNomeContatto(String nomeContatto);
 
 	Optional<Cliente> findByRagioneSociale(String ragioneSociale);
 
@@ -29,3 +29,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
 	List<Cliente> findAllByOrderByDataUltimoContatto();
 
 }
+
+//mancano i metodi:
+//ordinare per Provincia della sede legale.
+//filtrare per Parte del nome

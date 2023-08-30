@@ -1,6 +1,8 @@
 package BuildWeek.Epic_Energy_Service.cliente;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +65,42 @@ public class ClienteController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteCliente(@PathVariable UUID clienteId) {
 		clienteSrv.findByIdAndDelete(clienteId);
+	}
+
+	@GetMapping("/fatturato")
+	public ResponseEntity<Optional<Cliente>> getClientiByFatturato(@RequestParam double fatturato) {
+		Optional<Cliente> clientiByFatturato = clienteSrv.findByFatturato_annuale(fatturato);
+		return ResponseEntity.ok(clientiByFatturato);
+	}
+
+	@GetMapping("/dataInserimento")
+	public ResponseEntity<Optional<Cliente>> getClientiByDataInserimento(@RequestParam LocalDate dataInserimento) {
+		Optional<Cliente> clientiByDataInserimento = clienteSrv.findByData_inserimento(dataInserimento);
+		return ResponseEntity.ok(clientiByDataInserimento);
+	}
+
+	@GetMapping("/dataUltimoContatto")
+	public ResponseEntity<Optional<Cliente>> getClientiByDataUltimoContatto(
+			@RequestParam LocalDate dataUltimoContatto) {
+		Optional<Cliente> clientiBydataUltimoContatto = clienteSrv.findByData_ultimo_contatto(dataUltimoContatto);
+		return ResponseEntity.ok(clientiBydataUltimoContatto);
+	}
+
+	@GetMapping("/nomeContatto")
+	public ResponseEntity<List<Cliente>> getClientiByNomeContatto(@RequestParam String nomeContatto) {
+		List<Cliente> clientiByNomeContatto = clienteSrv.findByNome_contatto(nomeContatto);
+
+		if (clientiByNomeContatto.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(clientiByNomeContatto);
+		}
+	}
+
+	@GetMapping("/ragioneSociale")
+	public ResponseEntity<Optional<Cliente>> getClientiByRagioneSociale(@RequestParam String ragioneSociale) {
+		Optional<Cliente> clientiByragioneSociale = clienteSrv.findByRagione_sociale(ragioneSociale);
+		return ResponseEntity.ok(clientiByragioneSociale);
 	}
 
 }

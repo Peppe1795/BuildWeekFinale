@@ -1,5 +1,9 @@
 package BuildWeek.Epic_Energy_Service.fattura;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -8,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import BuildWeek.Epic_Energy_Service.Exception.NotFoundException;
+import BuildWeek.Epic_Energy_Service.cliente.Cliente;
 
 @Service
 public class FatturaService {
@@ -48,5 +53,21 @@ public class FatturaService {
 	public void findByIdAndDelete(int numeroFattura) throws NotFoundException {
 		Fattura found = this.findById(numeroFattura);
 		fatturaRepo.delete(found);
+	}
+
+	public List<Fattura> findByStato_Fattura(Stato_fattura statoFattura) {
+		return fatturaRepo.findByStatoFattura(statoFattura);
+	}
+
+	public List<Fattura> findByData(LocalDate data) {
+		return fatturaRepo.findByData(data);
+	}
+
+	public List<Fattura> findByAnno(int anno) {
+		return fatturaRepo.findByAnno(anno);
+	}
+
+	public Optional<Fattura> findByCliente(Cliente clienteId) {
+		return fatturaRepo.findByCliente(clienteId);
 	}
 }

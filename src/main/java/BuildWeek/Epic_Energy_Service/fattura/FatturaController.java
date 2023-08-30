@@ -1,8 +1,13 @@
 package BuildWeek.Epic_Energy_Service.fattura;
 
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import BuildWeek.Epic_Energy_Service.cliente.Cliente;
 
 @RestController
 @RequestMapping("/utenti/fattura")
@@ -54,6 +61,45 @@ public class FatturaController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteFattura(@PathVariable int numeroFattura) {
 		fatturaSrv.findByIdAndDelete(numeroFattura);
+	}
+
+	@GetMapping("/statoFattura")
+	public ResponseEntity<List<Fattura>> getFattureByStatoFattura(@RequestParam Stato_fattura statoFattura) {
+		List<Fattura> fattureByStatoFattura = fatturaSrv.findByStato_Fattura(statoFattura);
+
+		if (fattureByStatoFattura.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(fattureByStatoFattura);
+		}
+	}
+
+	@GetMapping("/anno")
+	public ResponseEntity<List<Fattura>> getFattureByAnno(@RequestParam int anno) {
+		List<Fattura> fattureByAnno = fatturaSrv.findByAnno(anno);
+
+		if (fattureByAnno.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(fattureByAnno);
+		}
+	}
+
+	@GetMapping("/data")
+	public ResponseEntity<List<Fattura>> getFattureByData(@RequestParam LocalDate data) {
+		List<Fattura> fattureByData = fatturaSrv.findByData(data);
+
+		if (fattureByData.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(fattureByData);
+		}
+	}
+
+	@GetMapping("/clienteId")
+	public ResponseEntity<Optional<Fattura>> getFattureByCliente(@RequestParam Cliente clienteId) {
+		Optional<Fattura> clientiByCliente = fatturaSrv.findByCliente(clienteId);
+		return ResponseEntity.ok(clientiByCliente);
 	}
 
 }

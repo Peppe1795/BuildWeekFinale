@@ -2,6 +2,7 @@ package BuildWeek.Epic_Energy_Service.cliente;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,24 +64,20 @@ public class ClienteService {
 		clienteRepo.delete(found);
 	}
 
-	public Cliente findByFatturato_annuale(double fatturato_annuale) {
-		return clienteRepo.findByFatturatoAnnuale(fatturato_annuale).orElseThrow(() -> new NotFoundException(
-				"Cliente con fatturato annuale pari a: " + fatturato_annuale + " non trovato"));
+	public Optional<Cliente> findByFatturato_annuale(double fatturato) {
+		return clienteRepo.findByFatturatoAnnuale(fatturato);
 	}
 
-	public Cliente findByData_inserimento(LocalDate dataInserimento) {
-		return clienteRepo.findByDataInserimento(dataInserimento).orElseThrow(
-				() -> new NotFoundException("Cliente con data di inserimento: " + dataInserimento + " non trovato"));
+	public Optional<Cliente> findByData_inserimento(LocalDate dataInserimento) {
+		return clienteRepo.findByDataInserimento(dataInserimento);
 	}
 
-	public Cliente findByData_ultimoContatto(LocalDate dataUltimoContatto) {
-		return clienteRepo.findByDataUltimoContatto(dataUltimoContatto).orElseThrow(() -> new NotFoundException(
-				"Cliente con data di ultimo contatto: " + dataUltimoContatto + " non trovato"));
+	public Optional<Cliente> findByData_ultimo_contatto(LocalDate dataUltimoContatto) {
+		return clienteRepo.findByDataUltimoContatto(dataUltimoContatto);
 	}
 
-	public Cliente findByNome_contatto(String nome_contatto) {
-		return clienteRepo.findByNomeContatto(nome_contatto)
-				.orElseThrow(() -> new NotFoundException("Cliente con nome: " + nome_contatto + " non trovato"));
+	public List<Cliente> findByNome_contatto(String nomeContatto) {
+		return clienteRepo.findByNomeContatto(nomeContatto);
 	}
 
 	public Cliente update(Cliente cliente) {
@@ -104,9 +101,8 @@ public class ClienteService {
 		return clienteRepo.save(cliente);
 	}
 
-	public Cliente findByRagioneSociale(String ragioneSociale) {
-		return clienteRepo.findByRagioneSociale(ragioneSociale).orElseThrow(
-				() -> new NotFoundException("Cliente con ragione sociale: " + ragioneSociale + " non trovato"));
+	public Optional<Cliente> findByRagione_sociale(String ragioneSociale) {
+		return clienteRepo.findByRagioneSociale(ragioneSociale);
 	}
 
 	public List<Cliente> findClienti() {
