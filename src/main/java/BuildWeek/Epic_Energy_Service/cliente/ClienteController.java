@@ -34,7 +34,7 @@ public class ClienteController {
 		return clienteSrv.find(page, size, sortBy);
 	}
 
-	@GetMapping("/{ordinati}")
+	@GetMapping("/ordinati")
 	public ResponseEntity<List<Cliente>> getListaClientiOrdinati(@RequestParam(name = "ordinati") String criterio) {
 		List<Cliente> clientiOrdinati = clienteSrv.getListaClientiOrdinati(criterio);
 		return ResponseEntity.ok(clientiOrdinati);

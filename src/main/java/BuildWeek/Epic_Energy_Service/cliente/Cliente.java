@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import BuildWeek.Epic_Energy_Service.fattura.Fattura;
 import BuildWeek.Epic_Energy_Service.indirizzo.Indirizzo;
 import jakarta.persistence.Entity;
@@ -44,8 +47,10 @@ public class Cliente {
 	@Enumerated(EnumType.STRING)
 	private Tipo_cliente tipo_cliente;
 	@ManyToOne
+	@Cascade(CascadeType.ALL)
 	private Indirizzo sedeLegale;
 	@ManyToOne
+	@Cascade(CascadeType.ALL)
 	private Indirizzo sedeOperativa;
 	@OneToMany
 	private List<Fattura> fatture;
