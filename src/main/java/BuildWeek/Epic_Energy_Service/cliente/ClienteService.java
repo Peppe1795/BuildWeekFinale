@@ -111,6 +111,8 @@ public class ClienteService {
 
 	public List<Cliente> findClienti() {
 		return clienteRepo.findAll();
+	}
+
 	public List<Cliente> getListaClientiOrdinati(String criterioOrdinamento) {
 		switch (criterioOrdinamento) {
 		case "nome":
