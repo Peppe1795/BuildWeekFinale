@@ -17,6 +17,10 @@ import BuildWeek.Epic_Energy_Service.cliente.ClienteService;
 import BuildWeek.Epic_Energy_Service.cliente.Tipo_cliente;
 import BuildWeek.Epic_Energy_Service.comuni.Comune;
 import BuildWeek.Epic_Energy_Service.comuni.ComuneService;
+import BuildWeek.Epic_Energy_Service.fattura.Fattura;
+import BuildWeek.Epic_Energy_Service.fattura.FatturaRequestPayload;
+import BuildWeek.Epic_Energy_Service.fattura.FatturaService;
+import BuildWeek.Epic_Energy_Service.fattura.Stato_fattura;
 import BuildWeek.Epic_Energy_Service.indirizzo.Indirizzo;
 import BuildWeek.Epic_Energy_Service.indirizzo.IndirizzoRequestPayload;
 import BuildWeek.Epic_Energy_Service.indirizzo.IndirizzoService;
@@ -30,18 +34,21 @@ public class RandomInstanceGenerator {
 	private final IndirizzoService is;
 	private final ComuneService cos;
 	private final UtenteService us;
+	private final FatturaService fs;
 	Faker faker = new Faker(new Locale("it"));
 	Random rnd = new Random();
 	@Autowired
 	PasswordEncoder bcrypt;
 
 	@Autowired
-	public RandomInstanceGenerator(ClienteService cs, IndirizzoService is, ComuneService cos, UtenteService us) {
+	public RandomInstanceGenerator(ClienteService cs, IndirizzoService is, ComuneService cos, UtenteService us,
+			FatturaService fs) {
 		super();
 		this.cs = cs;
 		this.is = is;
 		this.cos = cos;
 		this.us = us;
+		this.fs = fs;
 	}
 
 	public Utente randomUtenteGenerator(int numeroIstanze) {
@@ -124,7 +131,7 @@ public class RandomInstanceGenerator {
 		String numero_civico = rnd.nextInt(1000) + "/" + rndChar;
 		String località = faker.ancient().titan();
 		int cap = this.generateRandomNumberSeries(5);
-		Cliente thisCliente = cliente;
+
 		List<Comune> listaComuni = cos.findComuni();
 		Comune comune = listaComuni.get(rnd.nextInt(listaComuni.size()));
 
@@ -133,6 +140,31 @@ public class RandomInstanceGenerator {
 
 		return is.create(rndIndirizzo);
 
+	}
+
+	public Fattura randomFattureGenerator(int numeroIstanze) {
+		for (int i = 0; i < numeroIstanze; i++) {
+			try {
+				List<Cliente> clienti = cs.findClienti();
+				Cliente cliente = clienti.get(rnd.nextInt(clienti.size()));
+				int annoInserimento = cliente.getDataInserimento().getYear();
+				int range = LocalDate.now().getYear() - annoInserimento;
+				int anno = annoInserimento + rnd.nextInt(range);
+				int rndMonth = rnd.nextInt(12) + 1;
+				int rndDay = rnd.nextInt(28) + 1;
+				LocalDate data = LocalDate.of(anno, rndMonth, rndDay);
+				double importo = this.generateRandomFatture();
+				Stato_fattura stato_fattura = Stato_fattura.values()[rnd.nextInt(Stato_fattura.values().length)];
+				FatturaRequestPayload rndFattura = new FatturaRequestPayload(anno, data, importo, stato_fattura,
+						cliente);
+				fs.create(rndFattura);
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.out.println("Errore nella generazione delle fatture!");
+			}
+		}
+		return null;
 	}
 
 	public int generateRandomNumberSeries(int cifre) {
@@ -153,6 +185,12 @@ public class RandomInstanceGenerator {
 
 	public double generateRandomFatturato() {
 		int fatturatoVero = rnd.nextInt(10000000) + 100000;
+		double spiccioli = (rnd.nextInt(100) + 1) / 100.0;
+		return fatturatoVero + spiccioli;
+	}
+
+	public double generateRandomFatture() {
+		int fatturatoVero = rnd.nextInt(10000) + 1000;
 		double spiccioli = (rnd.nextInt(100) + 1) / 100.0;
 		return fatturatoVero + spiccioli;
 	}

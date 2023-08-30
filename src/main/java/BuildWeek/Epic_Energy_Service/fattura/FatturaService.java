@@ -22,8 +22,8 @@ public class FatturaService {
 	}
 
 	public Fattura create(FatturaRequestPayload body) {
-		Fattura nuovaFattura = new Fattura(body.getAnno(), body.getData(), body.getImporto(), body.getNumero(),
-				body.getStato_fattura());
+		Fattura nuovaFattura = new Fattura(body.getAnno(), body.getData(), body.getImporto(), body.getStato_fattura(),
+				body.getCliente());
 		return fatturaRepo.save(nuovaFattura);
 	}
 
@@ -41,7 +41,6 @@ public class FatturaService {
 		found.setAnno(body.getAnno());
 		found.setData(body.getData());
 		found.setImporto(body.getImporto());
-		found.setNumero(body.getNumero());
 		found.setStatoFattura(body.getStato_fattura());
 		found.setCliente(body.getCliente());
 

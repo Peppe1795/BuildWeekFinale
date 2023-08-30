@@ -13,6 +13,7 @@ public class BusinessRunner implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 //		rndGenerator.randomUtenteGenerator(20);
 //		rndGenerator.randomClienteGenerator(100);
+//		rndGenerator.randomFattureGenerator(10);
 
 	}
 

@@ -1,6 +1,7 @@
 package BuildWeek.Epic_Energy_Service.cliente;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,5 +102,14 @@ public class ClienteService {
 		cliente.setSedeOperativa(cliente.getSedeOperativa());
 
 		return clienteRepo.save(cliente);
+	}
+
+	public Cliente findByRagioneSociale(String ragioneSociale) {
+		return clienteRepo.findByRagioneSociale(ragioneSociale).orElseThrow(
+				() -> new NotFoundException("Cliente con ragione sociale: " + ragioneSociale + " non trovato"));
+	}
+
+	public List<Cliente> findClienti() {
+		return clienteRepo.findAll();
 	}
 }
