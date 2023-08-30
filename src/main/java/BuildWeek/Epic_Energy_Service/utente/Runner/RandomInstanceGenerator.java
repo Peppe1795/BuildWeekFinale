@@ -20,6 +20,7 @@ import BuildWeek.Epic_Energy_Service.comuni.ComuneService;
 import BuildWeek.Epic_Energy_Service.indirizzo.Indirizzo;
 import BuildWeek.Epic_Energy_Service.indirizzo.IndirizzoRequestPayload;
 import BuildWeek.Epic_Energy_Service.indirizzo.IndirizzoService;
+import BuildWeek.Epic_Energy_Service.utente.Ruolo;
 import BuildWeek.Epic_Energy_Service.utente.Utente;
 import BuildWeek.Epic_Energy_Service.utente.UtenteService;
 import BuildWeek.Epic_Energy_Service.utente.payload.UtenteRequestPayload;
@@ -52,7 +53,8 @@ public class RandomInstanceGenerator {
 				String username = faker.name().username();
 				String email = faker.internet().emailAddress();
 				String password = bcrypt.encode(faker.lorem().characters(6, 12));
-				UtenteRequestPayload utente = new UtenteRequestPayload(name, surname, username, email, password);
+				Ruolo role = Ruolo.values()[rnd.nextInt(Ruolo.values().length)];
+				UtenteRequestPayload utente = new UtenteRequestPayload(name, surname, username, email, password, role);
 
 				us.creaUtente(utente);
 			} catch (Exception e) {

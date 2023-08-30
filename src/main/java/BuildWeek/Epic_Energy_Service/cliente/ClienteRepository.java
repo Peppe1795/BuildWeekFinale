@@ -1,6 +1,7 @@
 package BuildWeek.Epic_Energy_Service.cliente;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -14,4 +15,13 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
 	Optional<Cliente> findByDataUltimoContatto(LocalDate dataIltimoContatto);
 
 	Optional<Cliente> findByNomeContatto(String nomeContatto);
+
+	List<Cliente> findAllByOrderByNomeContatto();
+
+	List<Cliente> findAllByOrderByFatturatoAnnuale();
+
+	List<Cliente> findAllByOrderByDataInserimento();
+
+	List<Cliente> findAllByOrderByDataUltimoContatto();
+
 }

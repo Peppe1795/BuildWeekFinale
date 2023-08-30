@@ -1,6 +1,7 @@
 package BuildWeek.Epic_Energy_Service.cliente;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,5 +102,22 @@ public class ClienteService {
 		cliente.setSedeOperativa(cliente.getSedeOperativa());
 
 		return clienteRepo.save(cliente);
+	}
+
+	public List<Cliente> getListaClientiOrdinati(String criterioOrdinamento) {
+		switch (criterioOrdinamento) {
+		case "nome":
+			return clienteRepo.findAllByOrderByNomeContatto();
+		case "fatturato":
+			return clienteRepo.findAllByOrderByFatturatoAnnuale();
+		case "dataInserimento":
+			return clienteRepo.findAllByOrderByDataInserimento();
+		case "dataUltimoContatto":
+			return clienteRepo.findAllByOrderByDataUltimoContatto();
+//		case "provincia":
+//			return clienteRepo.findAllByOrderBySedeLegale_Provincia();
+		default:
+			throw new IllegalArgumentException("Criterio di ordinamento non valido.");
+		}
 	}
 }

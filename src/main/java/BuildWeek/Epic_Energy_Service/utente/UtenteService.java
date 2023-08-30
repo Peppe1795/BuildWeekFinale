@@ -24,10 +24,10 @@ public class UtenteService {
 
 	public Utente creaUtente(UtenteRequestPayload body) {
 		utenteRepo.findByEmail(body.getEmail()).ifPresent(u -> {
-			throw new BadRequestException("l'email inserita non è valida");
+			throw new BadRequestException("L'email è gia presente del database");
 		});
 		Utente newUtente = new Utente(body.getNome(), body.getCognome(), body.getUsername(), body.getEmail(),
-				body.getPassword(), Ruolo.USER);
+				body.getPassword(), body.getRole());
 		return utenteRepo.save(newUtente);
 	}
 
