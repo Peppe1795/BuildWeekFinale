@@ -111,5 +111,20 @@ public class ClienteService {
 
 	public List<Cliente> findClienti() {
 		return clienteRepo.findAll();
+	public List<Cliente> getListaClientiOrdinati(String criterioOrdinamento) {
+		switch (criterioOrdinamento) {
+		case "nome":
+			return clienteRepo.findAllByOrderByNomeContatto();
+		case "fatturato":
+			return clienteRepo.findAllByOrderByFatturatoAnnuale();
+		case "dataInserimento":
+			return clienteRepo.findAllByOrderByDataInserimento();
+		case "dataUltimoContatto":
+			return clienteRepo.findAllByOrderByDataUltimoContatto();
+//		case "provincia":
+//			return clienteRepo.findAllByOrderBySedeLegale_Provincia();
+		default:
+			throw new IllegalArgumentException("Criterio di ordinamento non valido.");
+		}
 	}
 }

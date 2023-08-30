@@ -1,5 +1,6 @@
 package BuildWeek.Epic_Energy_Service.utente.payload;
 
+import BuildWeek.Epic_Energy_Service.utente.Ruolo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,4 +16,5 @@ public class UtenteRequestPayload {
 	private String username;
 	private String email;
 	private String password;
+	private Ruolo role;
 }
