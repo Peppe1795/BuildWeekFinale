@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,7 @@ public class FatturaController {
 	}
 
 	@PostMapping
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Fattura saveFattura(@RequestBody FatturaRequestPayload body) {
 		Fattura created = fatturaSrv.create(body);
@@ -53,17 +55,19 @@ public class FatturaController {
 	}
 
 	@PutMapping("/{numeroFattura}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public Fattura updateFattura(@PathVariable int numeroFattura, @RequestBody FatturaRequestPayload body) {
 		return fatturaSrv.findByIdAndUpdate(numeroFattura, body);
 	}
 
 	@DeleteMapping("/{numeroFattura}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteFattura(@PathVariable int numeroFattura) {
 		fatturaSrv.findByIdAndDelete(numeroFattura);
 	}
 
-	@GetMapping("/statoFattura")
+	@GetMapping("utenti/fattura/statoFattura")
 	public ResponseEntity<List<Fattura>> getFattureByStatoFattura(@RequestParam Stato_fattura statoFattura) {
 		List<Fattura> fattureByStatoFattura = fatturaSrv.findByStato_Fattura(statoFattura);
 
@@ -74,7 +78,7 @@ public class FatturaController {
 		}
 	}
 
-	@GetMapping("/anno")
+	@GetMapping("utenti/fattura/anno")
 	public ResponseEntity<List<Fattura>> getFattureByAnno(@RequestParam int anno) {
 		List<Fattura> fattureByAnno = fatturaSrv.findByAnno(anno);
 
@@ -85,7 +89,7 @@ public class FatturaController {
 		}
 	}
 
-	@GetMapping("/data")
+	@GetMapping("utenti/fattura/data")
 	public ResponseEntity<List<Fattura>> getFattureByData(@RequestParam LocalDate data) {
 		List<Fattura> fattureByData = fatturaSrv.findByData(data);
 
@@ -96,7 +100,7 @@ public class FatturaController {
 		}
 	}
 
-	@GetMapping("/clienteId")
+	@GetMapping("utenti/fattura/clienteId")
 	public ResponseEntity<Optional<Fattura>> getFattureByCliente(@RequestParam Cliente clienteId) {
 		Optional<Fattura> clientiByCliente = fatturaSrv.findByCliente(clienteId);
 		return ResponseEntity.ok(clientiByCliente);

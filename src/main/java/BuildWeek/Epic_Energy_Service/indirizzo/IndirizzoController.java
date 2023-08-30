@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,6 +35,7 @@ public class IndirizzoController {
 	}
 
 	@PostMapping
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Indirizzo saveIndirizzo(@RequestBody IndirizzoRequestPayload body) {
 		Indirizzo created = indirizzoSrv.create(body);
@@ -48,11 +50,13 @@ public class IndirizzoController {
 	}
 
 	@PutMapping("/{indirizzoId}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public Indirizzo updateIndirizzo(@PathVariable UUID indirizzoId, @RequestBody IndirizzoRequestPayload body) {
 		return indirizzoSrv.findByIdAndUpdate(indirizzoId, body);
 	}
 
 	@DeleteMapping("/{indirizzoId}")
+	@PreAuthorize("hasAuthority('ADMIN')")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteIndirizzo(@PathVariable UUID indirizzoId) {
 		indirizzoSrv.findByIdAndDelete(indirizzoId);
