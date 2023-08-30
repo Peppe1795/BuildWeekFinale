@@ -50,10 +50,8 @@ public class ExceptionsHandler {
 	}
 
 	@ExceptionHandler(Exception.class)
-	// @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public ErrorsPayload handleGeneric(Exception e) {
-		log.error(e.getMessage());
-		e.printStackTrace();
 		return new ErrorsPayload("Qualcosa è andato storto, Proveremo a risolvere nel minor tempo possibile",
 				new Date());
 	}
