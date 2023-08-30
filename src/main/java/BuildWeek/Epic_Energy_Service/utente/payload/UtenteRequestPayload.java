@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
+
 public class UtenteRequestPayload {
 	private String nome;
 	private String cognome;
