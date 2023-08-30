@@ -22,7 +22,7 @@ public class ExceptionsHandler {
 		List<String> errors = e.getBindingResult().getFieldErrors().stream().map(error -> error.getDefaultMessage())
 				.toList();
 
-		return new ErrorsPayloadWithList("Ci sono errori nel payload", new Date(), errors);
+		return new ErrorsPayloadWithList("Errore Nella Struttura del payload", new Date(), errors);
 	}
 
 	@ExceptionHandler(BadRequestException.class)
