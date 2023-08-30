@@ -30,7 +30,7 @@ public class ExceptionsHandler {
 	}
 
 	@ExceptionHandler(Exception.class)
-	// @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	public ErrorsPayload handleGeneric(Exception e) {
 		log.error(e.getMessage());
 		e.printStackTrace();
