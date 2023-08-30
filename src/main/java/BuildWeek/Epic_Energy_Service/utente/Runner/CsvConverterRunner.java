@@ -16,7 +16,7 @@ public class CsvConverterRunner implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 //		converter.convertCvs("comuni-italiani.csv");
 //		converter.convertCvs("province-italiane.csv");
-		// converter.linkProvinceEComuni();
+//		converter.linkProvinceEComuni();
 
 	}
 
