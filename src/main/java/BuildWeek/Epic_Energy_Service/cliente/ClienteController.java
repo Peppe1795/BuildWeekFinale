@@ -104,6 +104,8 @@ public class ClienteController {
 	public ResponseEntity<String> deleteCliente(@PathVariable UUID clienteId) {
 		clienteSrv.findByIdAndDelete(clienteId);
 		return ResponseEntity.ok("Cliente eliminato con successo.");
+	}
+
 	@GetMapping("/parteDelNome")
 	public ResponseEntity<List<Cliente>> getClientiByParteDelNome(@RequestParam String parteDelNome) {
 		List<Cliente> clientiByParteDelNome = clienteSrv.findByParteDelNome(parteDelNome);
