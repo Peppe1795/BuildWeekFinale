@@ -1,7 +1,6 @@
 package BuildWeek.Epic_Energy_Service.cliente;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -38,8 +37,10 @@ public class ClienteController {
 	}
 
 	@GetMapping("/ordinati")
-	public ResponseEntity<List<Cliente>> getListaClientiOrdinati(@RequestParam(name = "ordinati") String criterio) {
-		List<Cliente> clientiOrdinati = clienteSrv.getListaClientiOrdinati(criterio);
+	public ResponseEntity<Page<Cliente>> getListaClientiOrdinati(@RequestParam(name = "ordinati") String criterio,
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "clienteId") String sortBy) {
+		Page<Cliente> clientiOrdinati = clienteSrv.getListaClientiOrdinati(criterio, page, size, sortBy);
 		return ResponseEntity.ok(clientiOrdinati);
 	}
 
