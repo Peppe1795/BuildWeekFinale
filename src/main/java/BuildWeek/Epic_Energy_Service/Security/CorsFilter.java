@@ -29,8 +29,6 @@ public class CorsFilter extends OncePerRequestFilter {
 			filterChain.doFilter(request, response);
 		}
 
-		filterChain.doFilter(request, response);
-
 	}
 
 }

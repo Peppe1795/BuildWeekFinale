@@ -34,13 +34,11 @@ public class UtenteController {
 
 	
 	@GetMapping
-	@PreAuthorize("hasAuthority('ADMIN')")
 	public Page<Utente> getUtenti(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "userId") String sortBy) {
 		return utenteService.find(page, size, sortBy);
 	}
 	
-	@PreAuthorize("hasAuthority('ADMIN')")
 	@GetMapping("/{userId}")
 	public Utente findUtentiById(@PathVariable UUID userId) {
 		return utenteService.findById(userId);
