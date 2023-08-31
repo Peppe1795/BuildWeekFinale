@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -31,6 +33,11 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
 	List<Cliente> findAllByOrderByDataUltimoContatto();
 
 	// List<Cliente> findAllByOrderByProvinciaSedeLegaleAsc();
+	@Query("SELECT c FROM Cliente c JOIN c.sedeLegale s JOIN s.comune ORDER BY nome_provincia")
+	List<Cliente> findAllByOrderProvinciaSedeLegale();
+
+	@Query("SELECT c FROM Cliente c JOIN c.sedeLegale s JOIN s.comune p WHERE p.nome_provincia = :nome_provincia")
+	List<Cliente> findAllByProvinciaSedeLegale(@Param("nome_provincia") String nome_provincia);
 
 }
 

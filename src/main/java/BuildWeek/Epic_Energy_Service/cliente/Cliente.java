@@ -80,7 +80,8 @@ public class Cliente {
 				+ dataUltimoContatto + ", fatturatoAnnuale=" + fatturatoAnnuale + ", pec=" + pec + ", telefono="
 				+ telefono + ", emailContatto=" + emailContatto + ", nomeContatto=" + nomeContatto
 				+ ", cognomeContatto=" + cognomeContatto + ", telefonoContatto=" + telefonoContatto + ", tipo_cliente="
-				+ tipo_cliente + "]";
+				+ tipo_cliente + ", sede operativa comune " + sedeLegale.getComune().getDenominazione()
+				+ " in provincia di " + sedeLegale.getComune().getNome_provincia() + "]";
 	}
 
 }
