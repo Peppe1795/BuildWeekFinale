@@ -29,7 +29,7 @@ public class FatturaController {
 	private final FatturaService fatturaSrv;
 
 	@Autowired
-	private FatturaController(FatturaService fatturaSrv) {
+	public FatturaController(FatturaService fatturaSrv) {
 		this.fatturaSrv = fatturaSrv;
 	}
 
@@ -62,12 +62,12 @@ public class FatturaController {
 
 	@DeleteMapping("/{numeroFattura}")
 	@PreAuthorize("hasAuthority('ADMIN')")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteFattura(@PathVariable int numeroFattura) {
+	public ResponseEntity<String> deleteFattura(@PathVariable int numeroFattura) {
 		fatturaSrv.findByIdAndDelete(numeroFattura);
+		return ResponseEntity.ok("Fattura eliminate con successo.");
 	}
 
-	@GetMapping("utenti/fattura/statoFattura")
+	@GetMapping("/statoFattura")
 	public ResponseEntity<List<Fattura>> getFattureByStatoFattura(@RequestParam Stato_fattura statoFattura) {
 		List<Fattura> fattureByStatoFattura = fatturaSrv.findByStato_Fattura(statoFattura);
 
@@ -78,7 +78,7 @@ public class FatturaController {
 		}
 	}
 
-	@GetMapping("utenti/fattura/anno")
+	@GetMapping("/anno")
 	public ResponseEntity<List<Fattura>> getFattureByAnno(@RequestParam int anno) {
 		List<Fattura> fattureByAnno = fatturaSrv.findByAnno(anno);
 
@@ -89,7 +89,7 @@ public class FatturaController {
 		}
 	}
 
-	@GetMapping("utenti/fattura/data")
+	@GetMapping("/data")
 	public ResponseEntity<List<Fattura>> getFattureByData(@RequestParam LocalDate data) {
 		List<Fattura> fattureByData = fatturaSrv.findByData(data);
 
@@ -100,7 +100,7 @@ public class FatturaController {
 		}
 	}
 
-	@GetMapping("utenti/fattura/clienteId")
+	@GetMapping("/clienteId")
 	public ResponseEntity<Optional<Fattura>> getFattureByCliente(@RequestParam Cliente clienteId) {
 		Optional<Fattura> clientiByCliente = fatturaSrv.findByCliente(clienteId);
 		return ResponseEntity.ok(clientiByCliente);

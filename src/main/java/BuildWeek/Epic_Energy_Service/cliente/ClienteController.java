@@ -37,6 +37,54 @@ public class ClienteController {
 		return clienteSrv.find(page, size, sortBy);
 	}
 
+	@GetMapping("/ordinati")
+	public ResponseEntity<List<Cliente>> getListaClientiOrdinati(@RequestParam(name = "ordinati") String criterio) {
+		List<Cliente> clientiOrdinati = clienteSrv.getListaClientiOrdinati(criterio);
+		return ResponseEntity.ok(clientiOrdinati);
+	}
+
+	@GetMapping("/clienteId")
+	public Cliente findById(@PathVariable UUID clienteId) {
+		return clienteSrv.findByClienteId(clienteId);
+
+	}
+
+	@GetMapping("/fatturato")
+	public ResponseEntity<Optional<Cliente>> getClientiByFatturato(@RequestParam double fatturato) {
+		Optional<Cliente> clientiByFatturato = clienteSrv.findByFatturato_annuale(fatturato);
+		return ResponseEntity.ok(clientiByFatturato);
+	}
+
+	@GetMapping("/dataInserimento")
+	public ResponseEntity<Optional<Cliente>> getClientiByDataInserimento(@RequestParam LocalDate dataInserimento) {
+		Optional<Cliente> clientiByDataInserimento = clienteSrv.findByData_inserimento(dataInserimento);
+		return ResponseEntity.ok(clientiByDataInserimento);
+	}
+
+	@GetMapping("/dataUltimoContatto")
+	public ResponseEntity<Optional<Cliente>> getClientiByDataUltimoContatto(
+			@RequestParam LocalDate dataUltimoContatto) {
+		Optional<Cliente> clientiBydataUltimoContatto = clienteSrv.findByData_ultimo_contatto(dataUltimoContatto);
+		return ResponseEntity.ok(clientiBydataUltimoContatto);
+	}
+
+	@GetMapping("/nomeContatto")
+	public ResponseEntity<List<Cliente>> getClientiByNomeContatto(@RequestParam String nomeContatto) {
+		List<Cliente> clientiByNomeContatto = clienteSrv.findByNome_contatto(nomeContatto);
+
+		if (clientiByNomeContatto.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(clientiByNomeContatto);
+		}
+	}
+
+	@GetMapping("/ragioneSociale")
+	public ResponseEntity<Optional<Cliente>> getClientiByRagioneSociale(@RequestParam String ragioneSociale) {
+		Optional<Cliente> clientiByragioneSociale = clienteSrv.findByRagione_sociale(ragioneSociale);
+		return ResponseEntity.ok(clientiByragioneSociale);
+	}
+
 	@PutMapping("/{clienteId}")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public Cliente updateCliente(@PathVariable UUID clienteId, @RequestBody ClienteRequestPayload body) {
@@ -48,63 +96,14 @@ public class ClienteController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public Cliente saveCliente(@RequestBody ClienteRequestPayload body) {
 		Cliente created = clienteSrv.create(body);
-
 		return created;
 	}
 
 	@DeleteMapping("/{clienteId}")
 	@PreAuthorize("hasAuthority('ADMIN')")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteCliente(@PathVariable UUID clienteId) {
+	public ResponseEntity<String> deleteCliente(@PathVariable UUID clienteId) {
 		clienteSrv.findByIdAndDelete(clienteId);
-	}
-
-	@GetMapping("utenti/ordinati")
-	public ResponseEntity<List<Cliente>> getListaClientiOrdinati(@RequestParam(name = "ordinati") String criterio) {
-		List<Cliente> clientiOrdinati = clienteSrv.getListaClientiOrdinati(criterio);
-		return ResponseEntity.ok(clientiOrdinati);
-	}
-
-	@GetMapping("/{clienteId}")
-	public Cliente findById(@PathVariable UUID clienteId) {
-		return clienteSrv.findByClienteId(clienteId);
-
-	}
-
-	@GetMapping("utenti/fatturato")
-	public ResponseEntity<Optional<Cliente>> getClientiByFatturato(@RequestParam double fatturato) {
-		Optional<Cliente> clientiByFatturato = clienteSrv.findByFatturato_annuale(fatturato);
-		return ResponseEntity.ok(clientiByFatturato);
-	}
-
-	@GetMapping("utenti/dataInserimento")
-	public ResponseEntity<Optional<Cliente>> getClientiByDataInserimento(@RequestParam LocalDate dataInserimento) {
-		Optional<Cliente> clientiByDataInserimento = clienteSrv.findByData_inserimento(dataInserimento);
-		return ResponseEntity.ok(clientiByDataInserimento);
-	}
-
-	@GetMapping("utenti/dataUltimoContatto")
-	public ResponseEntity<Optional<Cliente>> getClientiByDataUltimoContatto(
-			@RequestParam LocalDate dataUltimoContatto) {
-		Optional<Cliente> clientiBydataUltimoContatto = clienteSrv.findByData_ultimo_contatto(dataUltimoContatto);
-		return ResponseEntity.ok(clientiBydataUltimoContatto);
-	}
-
-	@GetMapping("utenti/nomeContatto")
-	public ResponseEntity<List<Cliente>> getClientiByNomeContatto(@RequestParam String nomeContatto) {
-		List<Cliente> clientiByNomeContatto = clienteSrv.findByNome_contatto(nomeContatto);
-
-		if (clientiByNomeContatto.isEmpty()) {
-			return ResponseEntity.notFound().build();
-		} else {
-			return ResponseEntity.ok(clientiByNomeContatto);
-		}
-	}
-
-	@GetMapping("utenti/ragioneSociale")
-	public ResponseEntity<Optional<Cliente>> getClientiByRagioneSociale(@RequestParam String ragioneSociale) {
-		Optional<Cliente> clientiByragioneSociale = clienteSrv.findByRagione_sociale(ragioneSociale);
-		return ResponseEntity.ok(clientiByragioneSociale);
+		return ResponseEntity.ok("Cliente eliminato con successo.");
 	}
 
 }

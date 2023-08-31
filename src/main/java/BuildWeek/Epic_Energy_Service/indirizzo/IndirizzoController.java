@@ -5,6 +5,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +25,7 @@ public class IndirizzoController {
 	private final IndirizzoService indirizzoSrv;
 
 	@Autowired
-	private IndirizzoController(IndirizzoService indirizzoSrv) {
+	public IndirizzoController(IndirizzoService indirizzoSrv) {
 		this.indirizzoSrv = indirizzoSrv;
 	}
 
@@ -32,6 +33,12 @@ public class IndirizzoController {
 	public Page<Indirizzo> getFattura(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "indirizzoId") String sortBy) {
 		return indirizzoSrv.find(page, size, sortBy);
+	}
+
+	@GetMapping("/{indirizzoId}")
+	public Indirizzo findById(@PathVariable UUID indirizzoId) {
+		return indirizzoSrv.findById(indirizzoId);
+
 	}
 
 	@PostMapping
@@ -43,12 +50,6 @@ public class IndirizzoController {
 		return created;
 	}
 
-	@GetMapping("/{indirizzoId}")
-	public Indirizzo findById(@PathVariable UUID indirizzoId) {
-		return indirizzoSrv.findById(indirizzoId);
-
-	}
-
 	@PutMapping("/{indirizzoId}")
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public Indirizzo updateIndirizzo(@PathVariable UUID indirizzoId, @RequestBody IndirizzoRequestPayload body) {
@@ -57,9 +58,9 @@ public class IndirizzoController {
 
 	@DeleteMapping("/{indirizzoId}")
 	@PreAuthorize("hasAuthority('ADMIN')")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteIndirizzo(@PathVariable UUID indirizzoId) {
+	public ResponseEntity<String> deleteIndirizzo(@PathVariable UUID indirizzoId) {
 		indirizzoSrv.findByIdAndDelete(indirizzoId);
-	}
+		return ResponseEntity.ok("Indirizzo eliminato con successo.");
 
+	}
 }
