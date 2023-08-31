@@ -1,7 +1,6 @@
 package BuildWeek.Epic_Energy_Service.fattura;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -70,8 +69,9 @@ public class FatturaService {
 		return fatturaRepo.findByAnno(anno, indirizziPageable);
 	}
 
-	public Optional<Fattura> findByCliente(Cliente clienteId) {
-		return fatturaRepo.findByCliente(clienteId);
+	public Page<Fattura> findByCliente(Cliente clienteId, int page, int size, String sortBy) {
+		Pageable indirizziPageable = PageRequest.of(page, size, Sort.by(sortBy));
+		return fatturaRepo.findByCliente(clienteId, indirizziPageable);
 	}
 
 	public Page<Fattura> findByImportoRange(double minImporto, double maxImporto, int page, int size, String sortBy) {

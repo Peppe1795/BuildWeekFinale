@@ -1,7 +1,6 @@
 package BuildWeek.Epic_Energy_Service.fattura;
 
 import java.time.LocalDate;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -47,7 +46,7 @@ public class FatturaController {
 	@GetMapping("/statoFattura")
 	public ResponseEntity<Page<Fattura>> getFattureByStatoFattura(@RequestParam Stato_fattura statoFattura,
 			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
-			@RequestParam(defaultValue = "nomeContatto") String sortBy) {
+			@RequestParam(defaultValue = "statoFattura") String sortBy) {
 		Page<Fattura> fattureByStatoFattura = fatturaSrv.findByStato_Fattura(statoFattura, page, size, sortBy);
 
 		if (fattureByStatoFattura.isEmpty()) {
@@ -60,7 +59,7 @@ public class FatturaController {
 	@GetMapping("/anno")
 	public ResponseEntity<Page<Fattura>> getFattureByAnno(@RequestParam int anno,
 			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
-			@RequestParam(defaultValue = "nomeContatto") String sortBy) {
+			@RequestParam(defaultValue = "anno") String sortBy) {
 		Page<Fattura> fattureByAnno = fatturaSrv.findByAnno(anno, page, size, sortBy);
 
 		if (fattureByAnno.isEmpty()) {
@@ -73,7 +72,7 @@ public class FatturaController {
 	@GetMapping("/data")
 	public ResponseEntity<Page<Fattura>> getFattureByData(@RequestParam LocalDate data,
 			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
-			@RequestParam(defaultValue = "nomeContatto") String sortBy) {
+			@RequestParam(defaultValue = "data") String sortBy) {
 		Page<Fattura> fattureByData = fatturaSrv.findByData(data, page, size, sortBy);
 
 		if (fattureByData.isEmpty()) {
@@ -84,15 +83,17 @@ public class FatturaController {
 	}
 
 	@GetMapping("/clienteId")
-	public ResponseEntity<Optional<Fattura>> getFattureByCliente(@RequestParam Cliente clienteId) {
-		Optional<Fattura> clientiByCliente = fatturaSrv.findByCliente(clienteId);
+	public ResponseEntity<Page<Fattura>> getFattureByCliente(@RequestParam Cliente clienteId,
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "cliente_clienteId") String sortBy) {
+		Page<Fattura> clientiByCliente = fatturaSrv.findByCliente(clienteId, page, size, sortBy);
 		return ResponseEntity.ok(clientiByCliente);
 	}
 
 	@GetMapping("/importo")
 	public ResponseEntity<Page<Fattura>> getFattureByImportoRange(@RequestParam double minImporto,
 			@RequestParam double maxImporto, @RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "nomeContatto") String sortBy) {
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "importo") String sortBy) {
 		Page<Fattura> fattureByImportoRange = fatturaSrv.findByImportoRange(minImporto, maxImporto, page, size, sortBy);
 
 		if (fattureByImportoRange.isEmpty()) {
