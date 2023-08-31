@@ -31,12 +31,10 @@ public class UtenteController {
 	}
 
 	@GetMapping
-
 	public Page<Utente> getUtenti(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "userId") String sortBy) {
 		return utenteService.find(page, size, sortBy);
 	}
-
 	@GetMapping("/{userId}")
 	public Utente findUtentiById(@PathVariable UUID userId) {
 		return utenteService.findById(userId);
