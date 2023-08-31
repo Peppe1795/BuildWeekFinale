@@ -69,8 +69,10 @@ public class ClienteController {
 	}
 
 	@GetMapping("/parteDelNome")
-	public ResponseEntity<List<Cliente>> getClientiByParteDelNome(@RequestParam String parteDelNome) {
-		List<Cliente> clientiByParteDelNome = clienteSrv.findByParteDelNome(parteDelNome);
+	public ResponseEntity<Page<Cliente>> getClientiByParteDelNome(@RequestParam String parteDelNome,
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "nomeContatto") String sortBy) {
+		Page<Cliente> clientiByParteDelNome = clienteSrv.findByParteDelNome(parteDelNome, page, size, sortBy);
 
 		if (clientiByParteDelNome.isEmpty()) {
 			return ResponseEntity.notFound().build();
@@ -80,8 +82,11 @@ public class ClienteController {
 	}
 
 	@GetMapping("/parteRagioneSociale")
-	public ResponseEntity<List<Cliente>> getClientiByParteRagioneSociale(@RequestParam String parteRagioneSociale) {
-		List<Cliente> clientiByParteRagioneSociale = clienteSrv.findByParteRagioneSociale(parteRagioneSociale);
+	public ResponseEntity<Page<Cliente>> getClientiByParteRagioneSociale(@RequestParam String parteRagioneSociale,
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "ragioneSociale") String sortBy) {
+		Page<Cliente> clientiByParteRagioneSociale = clienteSrv.findByParteRagioneSociale(parteRagioneSociale, page,
+				size, sortBy);
 
 		if (clientiByParteRagioneSociale.isEmpty()) {
 			return ResponseEntity.notFound().build();

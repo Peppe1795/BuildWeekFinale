@@ -76,12 +76,14 @@ public class ClienteService {
 		return clienteRepo.findByDataUltimoContatto(dataUltimoContatto);
 	}
 
-	public List<Cliente> findByParteDelNome(String parteDelNome) {
-		return clienteRepo.findByNomeContattoContainingIgnoreCase(parteDelNome);
+	public Page<Cliente> findByParteDelNome(String parteDelNome, int page, int size, String sortBy) {
+		Pageable clientiPageable = PageRequest.of(page, size, Sort.by(sortBy));
+		return clienteRepo.findByNomeContattoContainingIgnoreCase(parteDelNome, clientiPageable);
 	}
 
-	public List<Cliente> findByParteRagioneSociale(String parteRagioneSociale) {
-		return clienteRepo.findByRagioneSocialeContainingIgnoreCase(parteRagioneSociale);
+	public Page<Cliente> findByParteRagioneSociale(String parteRagioneSociale, int page, int size, String sortBy) {
+		Pageable clientiPageable = PageRequest.of(page, size, Sort.by(sortBy));
+		return clienteRepo.findByRagioneSocialeContainingIgnoreCase(parteRagioneSociale, clientiPageable);
 	}
 
 	public Cliente update(Cliente cliente) {

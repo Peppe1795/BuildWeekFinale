@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,9 +20,9 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
 
 	Optional<Cliente> findByDataUltimoContatto(LocalDate dataUltimoContatto);
 
-	List<Cliente> findByNomeContattoContainingIgnoreCase(String parteDelNome);
+	Page<Cliente> findByNomeContattoContainingIgnoreCase(String parteDelNome, Pageable page);
 
-	List<Cliente> findByRagioneSocialeContainingIgnoreCase(String parteRagioneSociale);
+	Page<Cliente> findByRagioneSocialeContainingIgnoreCase(String parteRagioneSociale, Pageable page);
 
 	Optional<Cliente> findByRagioneSociale(String ragioneSociale);
 
