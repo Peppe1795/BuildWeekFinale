@@ -102,4 +102,16 @@ public class FatturaController {
 		return ResponseEntity.ok(clientiByCliente);
 	}
 
+	@GetMapping("/importo")
+	public ResponseEntity<List<Fattura>> getFattureByImportoRange(@RequestParam double minImporto,
+			@RequestParam double maxImporto) {
+		List<Fattura> fattureByImportoRange = fatturaSrv.findByImportoRange(minImporto, maxImporto);
+
+		if (fattureByImportoRange.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(fattureByImportoRange);
+		}
+	}
+
 }

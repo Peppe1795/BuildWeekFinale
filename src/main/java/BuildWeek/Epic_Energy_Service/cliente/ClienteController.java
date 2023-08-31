@@ -86,21 +86,32 @@ public class ClienteController {
 		return ResponseEntity.ok(clientiBydataUltimoContatto);
 	}
 
-	@GetMapping("/nomeContatto")
-	public ResponseEntity<List<Cliente>> getClientiByNomeContatto(@RequestParam String nomeContatto) {
-		List<Cliente> clientiByNomeContatto = clienteSrv.findByNome_contatto(nomeContatto);
-
-		if (clientiByNomeContatto.isEmpty()) {
-			return ResponseEntity.notFound().build();
-		} else {
-			return ResponseEntity.ok(clientiByNomeContatto);
-		}
-	}
+//	@GetMapping("/nomeContatto")
+//	public ResponseEntity<List<Cliente>> getClientiByNomeContatto(@RequestParam String nomeContatto) {
+//		List<Cliente> clientiByNomeContatto = clienteSrv.findByNome_contatto(nomeContatto);
+//
+//		if (clientiByNomeContatto.isEmpty()) {
+//			return ResponseEntity.notFound().build();
+//		} else {
+//			return ResponseEntity.ok(clientiByNomeContatto);
+//		}
+//	}
 
 	@GetMapping("/ragioneSociale")
 	public ResponseEntity<Optional<Cliente>> getClientiByRagioneSociale(@RequestParam String ragioneSociale) {
 		Optional<Cliente> clientiByragioneSociale = clienteSrv.findByRagione_sociale(ragioneSociale);
 		return ResponseEntity.ok(clientiByragioneSociale);
+	}
+
+	@GetMapping("/parteDelNome")
+	public ResponseEntity<List<Cliente>> getClientiByParteDelNome(@RequestParam String parteDelNome) {
+		List<Cliente> clientiByParteDelNome = clienteSrv.findByParteDelNome(parteDelNome);
+
+		if (clientiByParteDelNome.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(clientiByParteDelNome);
+		}
 	}
 
 }

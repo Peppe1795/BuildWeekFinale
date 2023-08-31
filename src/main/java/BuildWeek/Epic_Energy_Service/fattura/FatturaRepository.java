@@ -1,6 +1,5 @@
 package BuildWeek.Epic_Energy_Service.fattura;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +20,6 @@ public interface FatturaRepository extends JpaRepository<Fattura, Integer> {
 
 	List<Fattura> findByAnno(int anno);
 
-// questo metodo non va bene si deve filtrare per range di importi.
-	Optional<Fattura> findByImporto(BigDecimal importo);
+	List<Fattura> findByImportoBetween(double minImporto, double maxImporto);
+
 }

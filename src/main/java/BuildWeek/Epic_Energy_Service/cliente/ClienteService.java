@@ -76,8 +76,12 @@ public class ClienteService {
 		return clienteRepo.findByDataUltimoContatto(dataUltimoContatto);
 	}
 
-	public List<Cliente> findByNome_contatto(String nomeContatto) {
-		return clienteRepo.findByNomeContatto(nomeContatto);
+//	public List<Cliente> findByNome_contatto(String nomeContatto) {
+//		return clienteRepo.findByNomeContatto(nomeContatto);
+//	}
+
+	public List<Cliente> findByParteDelNome(String parteDelNome) {
+		return clienteRepo.findByNomeContattoContainingIgnoreCase(parteDelNome);
 	}
 
 	public Cliente update(Cliente cliente) {
@@ -120,9 +124,10 @@ public class ClienteService {
 		case "data_ultimoContatto":
 			return clienteRepo.findAllByOrderByDataUltimoContatto();
 //		case "provincia":
-//			return clienteRepo.findAllByOrderBySedeLegale_Provincia();
+//			return clienteRepo.findAllByOrderByProvinciaSedeLegaleAsc();
 		default:
 			throw new IllegalArgumentException("Criterio di ordinamento non valido.");
 		}
 	}
+
 }

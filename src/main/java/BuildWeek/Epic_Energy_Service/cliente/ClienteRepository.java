@@ -16,7 +16,9 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
 
 	Optional<Cliente> findByDataUltimoContatto(LocalDate dataUltimoContatto);
 
-	List<Cliente> findByNomeContatto(String nomeContatto);
+	// List<Cliente> findByNomeContatto(String nomeContatto);
+
+	List<Cliente> findByNomeContattoContainingIgnoreCase(String parteDelNome);
 
 	Optional<Cliente> findByRagioneSociale(String ragioneSociale);
 
@@ -27,6 +29,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
 	List<Cliente> findAllByOrderByDataInserimento();
 
 	List<Cliente> findAllByOrderByDataUltimoContatto();
+
+	// List<Cliente> findAllByOrderByProvinciaSedeLegaleAsc();
 
 }
 
