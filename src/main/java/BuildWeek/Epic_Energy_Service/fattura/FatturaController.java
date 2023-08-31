@@ -39,32 +39,10 @@ public class FatturaController {
 		return fatturaSrv.find(page, size, sortBy);
 	}
 
-	@PostMapping
-	@PreAuthorize("hasAuthority('ADMIN')")
-	@ResponseStatus(HttpStatus.CREATED)
-	public Fattura saveFattura(@RequestBody FatturaRequestPayload body) {
-		Fattura created = fatturaSrv.create(body);
-
-		return created;
-	}
-
 	@GetMapping("/{numeroFattura}")
 	public Fattura findById(@PathVariable int numeroFattura) {
 		return fatturaSrv.findById(numeroFattura);
 
-	}
-
-	@PutMapping("/{numeroFattura}")
-	@PreAuthorize("hasAuthority('ADMIN')")
-	public Fattura updateFattura(@PathVariable int numeroFattura, @RequestBody FatturaRequestPayload body) {
-		return fatturaSrv.findByIdAndUpdate(numeroFattura, body);
-	}
-
-	@DeleteMapping("/{numeroFattura}")
-	@PreAuthorize("hasAuthority('ADMIN')")
-	public ResponseEntity<String> deleteFattura(@PathVariable int numeroFattura) {
-		fatturaSrv.findByIdAndDelete(numeroFattura);
-		return ResponseEntity.ok("Fattura eliminate con successo.");
 	}
 
 	@GetMapping("/statoFattura")
@@ -118,4 +96,25 @@ public class FatturaController {
 		}
 	}
 
+	@PostMapping
+	@PreAuthorize("hasAuthority('ADMIN')")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Fattura saveFattura(@RequestBody FatturaRequestPayload body) {
+		Fattura created = fatturaSrv.create(body);
+
+		return created;
+	}
+
+	@PutMapping("/{numeroFattura}")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public Fattura updateFattura(@PathVariable int numeroFattura, @RequestBody FatturaRequestPayload body) {
+		return fatturaSrv.findByIdAndUpdate(numeroFattura, body);
+	}
+
+	@DeleteMapping("/{numeroFattura}")
+	@PreAuthorize("hasAuthority('ADMIN')")
+	public ResponseEntity<String> deleteFattura(@PathVariable int numeroFattura) {
+		fatturaSrv.findByIdAndDelete(numeroFattura);
+		return ResponseEntity.ok("Fattura eliminate con successo.");
+	}
 }
