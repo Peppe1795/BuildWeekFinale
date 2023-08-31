@@ -79,6 +79,17 @@ public class ClienteController {
 		}
 	}
 
+	@GetMapping("/parteRagioneSociale")
+	public ResponseEntity<List<Cliente>> getClientiByParteRagioneSociale(@RequestParam String parteRagioneSociale) {
+		List<Cliente> clientiByParteRagioneSociale = clienteSrv.findByParteRagioneSociale(parteRagioneSociale);
+
+		if (clientiByParteRagioneSociale.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(clientiByParteRagioneSociale);
+		}
+	}
+
 	@GetMapping("/ragioneSociale")
 	public ResponseEntity<Optional<Cliente>> getClientiByRagioneSociale(@RequestParam String ragioneSociale) {
 		Optional<Cliente> clientiByragioneSociale = clienteSrv.findByRagione_sociale(ragioneSociale);

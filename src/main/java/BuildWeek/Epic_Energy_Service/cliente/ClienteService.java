@@ -80,6 +80,10 @@ public class ClienteService {
 		return clienteRepo.findByNomeContattoContainingIgnoreCase(parteDelNome);
 	}
 
+	public List<Cliente> findByParteRagioneSociale(String parteRagioneSociale) {
+		return clienteRepo.findByRagioneSocialeContainingIgnoreCase(parteRagioneSociale);
+	}
+
 	public Cliente update(Cliente cliente) {
 
 		cliente.setRagioneSociale(cliente.getRagioneSociale());

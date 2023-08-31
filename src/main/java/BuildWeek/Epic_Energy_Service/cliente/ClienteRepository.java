@@ -20,6 +20,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
 
 	List<Cliente> findByNomeContattoContainingIgnoreCase(String parteDelNome);
 
+	List<Cliente> findByRagioneSocialeContainingIgnoreCase(String parteRagioneSociale);
+
 	Optional<Cliente> findByRagioneSociale(String ragioneSociale);
 
 	List<Cliente> findAllByOrderByRagioneSociale();
