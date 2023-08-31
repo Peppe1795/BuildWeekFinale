@@ -36,20 +36,6 @@ public class CsvConverterRunner implements CommandLineRunner {
 //		csvConverterThread.join();
 //		converter.linkProvinceEComuni();
 
-		// *********QUESTO è UN CONTROLLO PER LA QUERY PER ORDINARE IN BASE ALLE
-		// PROVINCE --->>> DA CANCELLARE ***************
-//		List<Cliente> clienti = cs.orderByProvinciaSedeLegale();
-//
-//		for (Cliente cliente : clienti) {
-//			System.out.println(cliente.getSedeLegale().getComune().getNome_provincia());
-//		}
-		// *********QUESTO è UN CONTROLLO PER LA QUERY PER FILTRARE IN BASE ALLE
-		// PROVINCE --->>> DA CANCELLARE ***************
-//		List<Cliente> clienti = cs.filterByProvincia("Roma");
-//		for (Cliente cliente : clienti) {
-//			System.out.println(
-//					cliente.getRagioneSociale() + " " + cliente.getSedeLegale().getComune().getNome_provincia());
-//		}
 	}
 
 }
