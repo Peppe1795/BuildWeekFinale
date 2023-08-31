@@ -1,9 +1,10 @@
 package BuildWeek.Epic_Energy_Service.fattura;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,12 +15,12 @@ public interface FatturaRepository extends JpaRepository<Fattura, Integer> {
 
 	Optional<Fattura> findByCliente(Cliente clienteId);
 
-	List<Fattura> findByStatoFattura(Stato_fattura statoFattura);
+	Page<Fattura> findByStatoFattura(Stato_fattura statoFattura, Pageable pageable);
 
-	List<Fattura> findByData(LocalDate data);
+	Page<Fattura> findByData(LocalDate data, Pageable pageable);
 
-	List<Fattura> findByAnno(int anno);
+	Page<Fattura> findByAnno(int anno, Pageable pageable);
 
-	List<Fattura> findByImportoBetween(double minImporto, double maxImporto);
+	Page<Fattura> findByImportoBetween(double minImporto, double maxImporto, Pageable pageable);
 
 }

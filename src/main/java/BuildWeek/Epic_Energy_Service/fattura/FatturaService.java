@@ -1,7 +1,6 @@
 package BuildWeek.Epic_Energy_Service.fattura;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,23 +54,29 @@ public class FatturaService {
 		fatturaRepo.delete(found);
 	}
 
-	public List<Fattura> findByStato_Fattura(Stato_fattura statoFattura) {
-		return fatturaRepo.findByStatoFattura(statoFattura);
+	public Page<Fattura> findByStato_Fattura(Stato_fattura statoFattura, int page, int size, String sortBy) {
+		Pageable indirizziPageable = PageRequest.of(page, size, Sort.by(sortBy));
+		return fatturaRepo.findByStatoFattura(statoFattura, indirizziPageable);
 	}
 
-	public List<Fattura> findByData(LocalDate data) {
-		return fatturaRepo.findByData(data);
+	public Page<Fattura> findByData(LocalDate data, int page, int size, String sortBy) {
+		Pageable indirizziPageable = PageRequest.of(page, size, Sort.by(sortBy));
+		return fatturaRepo.findByData(data, indirizziPageable);
 	}
 
-	public List<Fattura> findByAnno(int anno) {
-		return fatturaRepo.findByAnno(anno);
+	public Page<Fattura> findByAnno(int anno, int page, int size, String sortBy) {
+		Pageable indirizziPageable = PageRequest.of(page, size, Sort.by(sortBy));
+
+		return fatturaRepo.findByAnno(anno, indirizziPageable);
 	}
 
 	public Optional<Fattura> findByCliente(Cliente clienteId) {
 		return fatturaRepo.findByCliente(clienteId);
 	}
 
-	public List<Fattura> findByImportoRange(double minImporto, double maxImporto) {
-		return fatturaRepo.findByImportoBetween(minImporto, maxImporto);
+	public Page<Fattura> findByImportoRange(double minImporto, double maxImporto, int page, int size, String sortBy) {
+		Pageable indirizziPageable = PageRequest.of(page, size, Sort.by(sortBy));
+
+		return fatturaRepo.findByImportoBetween(minImporto, maxImporto, indirizziPageable);
 	}
 }
