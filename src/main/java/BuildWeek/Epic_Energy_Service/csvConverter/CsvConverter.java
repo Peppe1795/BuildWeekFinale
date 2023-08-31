@@ -20,7 +20,6 @@ public class CsvConverter {
 
 	private final ComuneService cs;
 	private final ProvinciaService ps;
-	private Scanner scanner;
 
 	@Autowired
 	public CsvConverter(ComuneService cs, ProvinciaService ps) {
@@ -30,7 +29,7 @@ public class CsvConverter {
 	}
 
 	public void convertCvs(String source) throws FileNotFoundException {
-		scanner = new Scanner(new File(source));
+		Scanner scanner = new Scanner(new File(source));
 		scanner.nextLine();
 
 		while (scanner.hasNextLine()) {
