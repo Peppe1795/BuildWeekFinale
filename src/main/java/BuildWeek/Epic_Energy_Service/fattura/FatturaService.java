@@ -70,4 +70,8 @@ public class FatturaService {
 	public Optional<Fattura> findByCliente(Cliente clienteId) {
 		return fatturaRepo.findByCliente(clienteId);
 	}
+
+	public List<Fattura> findByImportoRange(double minImporto, double maxImporto) {
+		return fatturaRepo.findByImportoBetween(minImporto, maxImporto);
+	}
 }
