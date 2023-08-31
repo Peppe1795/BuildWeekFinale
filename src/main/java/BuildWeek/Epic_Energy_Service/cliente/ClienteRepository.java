@@ -1,7 +1,6 @@
 package BuildWeek.Epic_Energy_Service.cliente;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -26,23 +25,18 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
 
 	Optional<Cliente> findByRagioneSociale(String ragioneSociale);
 
-	List<Cliente> findAllByOrderByRagioneSociale();
+	Page<Cliente> findAllByOrderByRagioneSociale(Pageable page);
 
-	List<Cliente> findAllByOrderByFatturatoAnnuale();
+	Page<Cliente> findAllByOrderByFatturatoAnnuale(Pageable page);
 
-	List<Cliente> findAllByOrderByDataInserimento();
+	Page<Cliente> findAllByOrderByDataInserimento(Pageable page);
 
-	List<Cliente> findAllByOrderByDataUltimoContatto();
+	Page<Cliente> findAllByOrderByDataUltimoContatto(Pageable page);
 
-	// List<Cliente> findAllByOrderByProvinciaSedeLegaleAsc();
 	@Query("SELECT c FROM Cliente c JOIN c.sedeLegale s JOIN s.comune ORDER BY nome_provincia")
-	List<Cliente> findAllByOrderProvinciaSedeLegale();
+	Page<Cliente> findAllByOrderProvinciaSedeLegale(Pageable page);
 
 	@Query("SELECT c FROM Cliente c JOIN c.sedeLegale s JOIN s.comune p WHERE p.nome_provincia = :nome_provincia")
-	List<Cliente> findAllByProvinciaSedeLegale(@Param("nome_provincia") String nome_provincia);
+	Page<Cliente> findAllByProvinciaSedeLegale(@Param("nome_provincia") String nome_provincia, Pageable page);
 
 }
-
-//mancano i metodi:
-//ordinare per Provincia della sede legale.
-//filtrare per Parte del nome

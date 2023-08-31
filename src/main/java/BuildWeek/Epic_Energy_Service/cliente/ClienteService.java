@@ -115,25 +115,27 @@ public class ClienteService {
 		return clienteRepo.findAll();
 	}
 
-	public List<Cliente> getListaClientiOrdinati(String criterioOrdinamento) {
+	public Page<Cliente> getListaClientiOrdinati(String criterioOrdinamento, int page, int size, String sortBy) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
 		switch (criterioOrdinamento) {
 		case "ragione_sociale":
-			return clienteRepo.findAllByOrderByRagioneSociale();
+			return clienteRepo.findAllByOrderByRagioneSociale(pageable);
 		case "fatturato_annuale":
-			return clienteRepo.findAllByOrderByFatturatoAnnuale();
+			return clienteRepo.findAllByOrderByFatturatoAnnuale(pageable);
 		case "data_inserimento":
-			return clienteRepo.findAllByOrderByDataInserimento();
+			return clienteRepo.findAllByOrderByDataInserimento(pageable);
 		case "data_ultimoContatto":
-			return clienteRepo.findAllByOrderByDataUltimoContatto();
+			return clienteRepo.findAllByOrderByDataUltimoContatto(pageable);
 		case "provincia":
-			return clienteRepo.findAllByOrderProvinciaSedeLegale();
+			return clienteRepo.findAllByOrderProvinciaSedeLegale(pageable);
 		default:
 			throw new IllegalArgumentException("Criterio di ordinamento non valido.");
 		}
 	}
 
-	public List<Cliente> filterByProvincia(String nome_provincia) {
-		return clienteRepo.findAllByProvinciaSedeLegale(nome_provincia);
+	public Page<Cliente> filterByProvincia(String nome_provincia, int page, int size, String sortBy) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+		return clienteRepo.findAllByProvinciaSedeLegale(nome_provincia, pageable);
 	}
 
 }
