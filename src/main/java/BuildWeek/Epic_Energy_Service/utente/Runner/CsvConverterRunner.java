@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import BuildWeek.Epic_Energy_Service.cliente.ClienteService;
 import BuildWeek.Epic_Energy_Service.csvConverter.CsvConverter;
 
 @Component
@@ -12,6 +13,9 @@ import BuildWeek.Epic_Energy_Service.csvConverter.CsvConverter;
 public class CsvConverterRunner implements CommandLineRunner {
 	@Autowired
 	CsvConverter converter;
+
+	@Autowired
+	ClienteService cs;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -32,6 +36,20 @@ public class CsvConverterRunner implements CommandLineRunner {
 //		csvConverterThread.join();
 //		converter.linkProvinceEComuni();
 
+		// *********QUESTO è UN CONTROLLO PER LA QUERY PER ORDINARE IN BASE ALLE
+		// PROVINCE --->>> DA CANCELLARE ***************
+//		List<Cliente> clienti = cs.orderByProvinciaSedeLegale();
+//
+//		for (Cliente cliente : clienti) {
+//			System.out.println(cliente.getSedeLegale().getComune().getNome_provincia());
+//		}
+		// *********QUESTO è UN CONTROLLO PER LA QUERY PER FILTRARE IN BASE ALLE
+		// PROVINCE --->>> DA CANCELLARE ***************
+//		List<Cliente> clienti = cs.filterByProvincia("Roma");
+//		for (Cliente cliente : clienti) {
+//			System.out.println(
+//					cliente.getRagioneSociale() + " " + cliente.getSedeLegale().getComune().getNome_provincia());
+//		}
 	}
 
 }
