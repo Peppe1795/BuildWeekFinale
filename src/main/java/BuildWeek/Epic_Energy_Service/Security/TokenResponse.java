@@ -1,5 +1,10 @@
 package BuildWeek.Epic_Energy_Service.Security;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class TokenResponse {
     private String token;
 
@@ -7,11 +12,4 @@ public class TokenResponse {
         this.token = token;
     }
 
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
 }
