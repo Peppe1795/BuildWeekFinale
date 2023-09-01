@@ -14,20 +14,20 @@ public class BusinessRunner implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-//		Thread popolateDb = new Thread(() -> {
-//			try {
-//				rndGenerator.randomUtenteGenerator(20);
-//				rndGenerator.randomClienteGenerator(100);
-//			} finally {
-//				Thread.currentThread().interrupt();
-//			}
-//
-//		});
-//
-//		popolateDb.start();
-//		popolateDb.join();
-//
-//		rndGenerator.randomFattureGenerator(1000);
+		Thread popolateDb = new Thread(() -> {
+			try {
+				rndGenerator.randomUtenteGenerator(20);
+				rndGenerator.randomClienteGenerator(100);
+			} finally {
+				Thread.currentThread().interrupt();
+			}
+
+		});
+
+		popolateDb.start();
+		popolateDb.join();
+
+		rndGenerator.randomFattureGenerator(1000);
 
 	}
 
