@@ -38,7 +38,7 @@ public class AuthController {
 
 	@PostMapping("/login")
 
-	public ResponseEntity<String> login(@RequestBody UtenteLoginPayload body) {
+	public ResponseEntity<TokenResponse> login(@RequestBody UtenteLoginPayload body) {
 
 		Utente utente = null;
 
@@ -50,7 +50,7 @@ public class AuthController {
 
 		if (utente != null && bcrypt.matches(body.getPassword(), utente.getPassword())) {
 			String token = jwtTools.creaToken(utente);
-			return new ResponseEntity<>(token, HttpStatus.OK);
+			return new ResponseEntity<>(new TokenResponse(token), HttpStatus.OK);
 
 		} else {
 			throw new UnauthorizedException(
