@@ -1,7 +1,5 @@
 package BuildWeek.Epic_Energy_Service.utente.Runner;
 
-import java.io.FileNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.core.annotation.Order;
@@ -22,21 +20,21 @@ public class CsvConverterRunner implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 
-		Thread csvConverterThread = new Thread(() -> {
-			try {
-				converter.convertCvs("comuni-italiani.csv");
-				converter.convertCvs("province-italiane.csv");
-			} catch (FileNotFoundException e) {
-
-				e.printStackTrace();
-			} finally {
-				Thread.currentThread().interrupt();
-			}
-
-		});
-		csvConverterThread.start();
-		csvConverterThread.join();
-		converter.linkProvinceEComuni();
+//		Thread csvConverterThread = new Thread(() -> {
+//			try {
+//				converter.convertCvs("comuni-italiani.csv");
+//				converter.convertCvs("province-italiane.csv");
+//			} catch (FileNotFoundException e) {
+//
+//				e.printStackTrace();
+//			} finally {
+//				Thread.currentThread().interrupt();
+//			}
+//
+//		});
+//		csvConverterThread.start();
+//		csvConverterThread.join();
+//		converter.linkProvinceEComuni();
 
 	}
 
